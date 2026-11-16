@@ -1,0 +1,1 @@
+[{"$type":"bootstrap","aggregates":[{"fn":"sum","name":"s","of":"s"}],"cluster":"s","groupBy":["s"],"level":1.5,"output":"replicates","replicates":1,"seed":"1"}]

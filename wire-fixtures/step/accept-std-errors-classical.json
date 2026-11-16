@@ -1,0 +1,1 @@
+[{"$type":"fit","control":{"maxIter":25,"tol":1E-08},"family":"gaussian","groupBy":[],"intercept":true,"link":"identity","output":"coefficients","predictors":[{"expr":{"$type":"col","name":"price"},"name":"price"}],"response":"sales","stdErrors":"classical"}]

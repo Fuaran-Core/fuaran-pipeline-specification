@@ -1,0 +1,1 @@
+[{"$type":"filter","pred":{"$type":"binary","left":{"$type":"col","name":"s"},"op":"sub","right":{"$type":"col","name":"s"}}}]

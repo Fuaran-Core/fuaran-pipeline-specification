@@ -1,0 +1,1 @@
+[{"$type":"filter","pred":{"$type":"apply","args":[{"$type":"col","name":"s"}],"fn":"dateDiffDays"}}]

@@ -1,0 +1,1 @@
+[{"$type":"filter","pred":{"$type":"coalesce","exprs":[{"$type":"col","name":"s"}]}}]

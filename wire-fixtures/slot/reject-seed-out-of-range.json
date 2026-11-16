@@ -1,0 +1,1 @@
+[{"$type":"kmeans","features":[{"expr":{"$type":"col","name":"x"},"name":"x"}],"groupBy":[],"k":2,"maxIterations":10,"output":"assignments","restarts":1,"seed":"9223372036854775808","silhouette":false,"standardise":true}]

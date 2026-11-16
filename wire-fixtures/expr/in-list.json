@@ -1,0 +1,1 @@
+[{"$type":"filter","pred":{"$type":"in","expr":{"$type":"col","name":"s"},"items":[{"$type":"col","name":"s"}]}}]

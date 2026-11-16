@@ -1,0 +1,1 @@
+[{"$type":"groupBy","aggs":[{"fn":"min","name":"s","of":"s"}],"keys":["s"]}]

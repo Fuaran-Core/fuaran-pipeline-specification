@@ -1,0 +1,2368 @@
+{
+  "specification": "compute-pipeline-wire",
+  "formatVersion": 1,
+  "hashAlgorithm": "compute-pipeline-sha256-v1",
+  "families": [ "pipeline", "step", "expr", "cell", "slot", "token", "source" ],
+  "reservedFamilies": [ "tree" ],
+  "schemas": {
+    "pipeline": "../schemas/v1/pipeline.schema.json"
+  },
+  "generator": "dotnet run --project tests/Fuaran.Core.Compute.Tests -- --emit-pipeline-corpus <specification root>",
+  "vectors": [
+    {
+      "id": "pipeline/accept-member-order",
+      "family": "pipeline",
+      "kind": "accept",
+      "file": "pipeline/accept-member-order.json",
+      "sha256": "f76b12e5f5513e26f26f9cbce65715e73b9fc8af6af0a3614d913710fe7e8789",
+      "canonical": "[{\"$type\":\"derive\",\"expr\":{\"$type\":\"binary\",\"left\":{\"$type\":\"col\",\"name\":\"amount\"},\"op\":\"sub\",\"right\":{\"$type\":\"col\",\"name\":\"discount\"}},\"name\":\"net\"}]",
+      "digest": "sha256:07b0c72e67bc4a76d0710f3496cda19486753cb8eab6a34225e2d7ae66676b23",
+      "description": "Members in an order other than the canonical one. A reader matches members by name; the canonical document, and so the hash, are the sorted one's."
+    },
+    {
+      "id": "pipeline/accept-unknown-member",
+      "family": "pipeline",
+      "kind": "accept",
+      "file": "pipeline/accept-unknown-member.json",
+      "sha256": "18a5364b9d2e8a64d6e03e47040df97e317680d6c24ffcfb120b0e2f5e94b686",
+      "canonical": "[{\"$type\":\"distinct\"}]",
+      "digest": "sha256:a82d75f66b759246871af23ec87fbb425d2c136f262ecc7e601d7b61c0424436",
+      "description": "A member this version does not define. A reader ignores it, which is what makes adding a member additive."
+    },
+    {
+      "id": "pipeline/accept-whitespace",
+      "family": "pipeline",
+      "kind": "accept",
+      "file": "pipeline/accept-whitespace.json",
+      "sha256": "55407eb1ec4cc67f178274d0e202bd218191d15a8653dff64cdf1175f6d432f2",
+      "canonical": "[{\"$type\":\"filter\",\"pred\":{\"$type\":\"col\",\"name\":\"active\"}},{\"$type\":\"distinct\"}]",
+      "digest": "sha256:c7c571f6c568c79894772a6d6ad3d1dedb20cb16a6c69d766b67eaae84df47ca",
+      "description": "Insignificant whitespace between tokens. A reader ignores it; the canonical document carries none."
+    },
+    {
+      "id": "pipeline/define-invoke",
+      "family": "pipeline",
+      "kind": "hash",
+      "file": "pipeline/define-invoke.json",
+      "sha256": "7188869e8181ef14131dce26c59a01df0d728e5d9ef01338044bcdcd2a36f278",
+      "digest": "sha256:7188869e8181ef14131dce26c59a01df0d728e5d9ef01338044bcdcd2a36f278",
+      "description": "A declared pipeline (`define-invoke`): see the specification's worked examples."
+    },
+    {
+      "id": "pipeline/embedded-source",
+      "family": "pipeline",
+      "kind": "hash",
+      "file": "pipeline/embedded-source.json",
+      "sha256": "7bfad63e5e7bb9298b3a67e6b9b678f0cdf69284f614ea7a14bc808d8dc06946",
+      "digest": "sha256:7bfad63e5e7bb9298b3a67e6b9b678f0cdf69284f614ea7a14bc808d8dc06946",
+      "description": "A declared pipeline (`embedded-source`): see the specification's worked examples."
+    },
+    {
+      "id": "pipeline/empty",
+      "family": "pipeline",
+      "kind": "hash",
+      "file": "pipeline/empty.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "description": "A declared pipeline (`empty`): see the specification's worked examples."
+    },
+    {
+      "id": "pipeline/expression-kinds",
+      "family": "pipeline",
+      "kind": "hash",
+      "file": "pipeline/expression-kinds.json",
+      "sha256": "2a50772dfc3608251a728f8b0b645eb8aba37015a635d5dee08323a65ac4c648",
+      "digest": "sha256:2a50772dfc3608251a728f8b0b645eb8aba37015a635d5dee08323a65ac4c648",
+      "description": "A declared pipeline (`expression-kinds`): see the specification's worked examples."
+    },
+    {
+      "id": "pipeline/filter-derive-sort",
+      "family": "pipeline",
+      "kind": "hash",
+      "file": "pipeline/filter-derive-sort.json",
+      "sha256": "fd06acbf7e635964c1fe6f3f74185dd1f8f2dedf97d43e075739ee5326cc0a8d",
+      "digest": "sha256:fd06acbf7e635964c1fe6f3f74185dd1f8f2dedf97d43e075739ee5326cc0a8d",
+      "description": "A declared pipeline (`filter-derive-sort`): see the specification's worked examples."
+    },
+    {
+      "id": "pipeline/fit-glm-options",
+      "family": "pipeline",
+      "kind": "hash",
+      "file": "pipeline/fit-glm-options.json",
+      "sha256": "77394cec7037d67069851c523a9a092ab8d7f941ffa950bdec334d262124263f",
+      "digest": "sha256:77394cec7037d67069851c523a9a092ab8d7f941ffa950bdec334d262124263f",
+      "description": "A declared pipeline (`fit-glm-options`): see the specification's worked examples."
+    },
+    {
+      "id": "pipeline/fit-predict",
+      "family": "pipeline",
+      "kind": "hash",
+      "file": "pipeline/fit-predict.json",
+      "sha256": "41ea6c8f1e59b02ff244f9372e589362a262d25710efdb9ea8b4a771cdd3b980",
+      "digest": "sha256:41ea6c8f1e59b02ff244f9372e589362a262d25710efdb9ea8b4a771cdd3b980",
+      "description": "A declared pipeline (`fit-predict`): see the specification's worked examples."
+    },
+    {
+      "id": "pipeline/float-layout",
+      "family": "pipeline",
+      "kind": "hash",
+      "file": "pipeline/float-layout.json",
+      "sha256": "938ab72e80a7ddcc9185690fc385ffb67bbae172898f90c8b2114d86b672716b",
+      "digest": "sha256:938ab72e80a7ddcc9185690fc385ffb67bbae172898f90c8b2114d86b672716b",
+      "description": "A declared pipeline (`float-layout`): see the specification's worked examples."
+    },
+    {
+      "id": "pipeline/group-by-every-aggregate",
+      "family": "pipeline",
+      "kind": "hash",
+      "file": "pipeline/group-by-every-aggregate.json",
+      "sha256": "d2b6f3fe3d7c9020c7f57af0470bc545049af81e51bc2ca46914bb909d5782a0",
+      "digest": "sha256:d2b6f3fe3d7c9020c7f57af0470bc545049af81e51bc2ca46914bb909d5782a0",
+      "description": "A declared pipeline (`group-by-every-aggregate`): see the specification's worked examples."
+    },
+    {
+      "id": "pipeline/join-union-intersect-except",
+      "family": "pipeline",
+      "kind": "hash",
+      "file": "pipeline/join-union-intersect-except.json",
+      "sha256": "aeff3ee19f443bd4f20c3fa8358f108592daf1b3b7bc3e22d2cebfc0dd5619b3",
+      "digest": "sha256:aeff3ee19f443bd4f20c3fa8358f108592daf1b3b7bc3e22d2cebfc0dd5619b3",
+      "description": "A declared pipeline (`join-union-intersect-except`): see the specification's worked examples."
+    },
+    {
+      "id": "pipeline/kmeans-bootstrap",
+      "family": "pipeline",
+      "kind": "hash",
+      "file": "pipeline/kmeans-bootstrap.json",
+      "sha256": "cd9f5e0ec5ae0eaef5a4ec4e1ae5430c1c882515df66dd4f8b0e8ca321003893",
+      "digest": "sha256:cd9f5e0ec5ae0eaef5a4ec4e1ae5430c1c882515df66dd4f8b0e8ca321003893",
+      "description": "A declared pipeline (`kmeans-bootstrap`): see the specification's worked examples."
+    },
+    {
+      "id": "pipeline/literal-cells",
+      "family": "pipeline",
+      "kind": "hash",
+      "file": "pipeline/literal-cells.json",
+      "sha256": "b30dfd3a2086d510e45c13e0ef22de1f3098ed6b0556de2f72c3006d6453cfe8",
+      "digest": "sha256:b30dfd3a2086d510e45c13e0ef22de1f3098ed6b0556de2f72c3006d6453cfe8",
+      "description": "A declared pipeline (`literal-cells`): see the specification's worked examples."
+    },
+    {
+      "id": "pipeline/project-distinct-limit",
+      "family": "pipeline",
+      "kind": "hash",
+      "file": "pipeline/project-distinct-limit.json",
+      "sha256": "8c18b0206c1d0c4ab14d0105cccdcf71ec8b40c4315661fc55668e3730e1d533",
+      "digest": "sha256:8c18b0206c1d0c4ab14d0105cccdcf71ec8b40c4315661fc55668e3730e1d533",
+      "description": "A declared pipeline (`project-distinct-limit`): see the specification's worked examples."
+    },
+    {
+      "id": "pipeline/reject-not-a-list",
+      "family": "pipeline",
+      "kind": "reject",
+      "file": "pipeline/reject-not-a-list.json",
+      "sha256": "678e07d1d041491b3697a14f75fbc50dd4e926d0ba57b1bf4f55025f1f5edac6",
+      "reject": "not-a-pipeline",
+      "detect": "schema",
+      "description": "A single step where a pipeline (a list of steps) is expected."
+    },
+    {
+      "id": "pipeline/reject-not-json",
+      "family": "pipeline",
+      "kind": "reject",
+      "file": "pipeline/reject-not-json.json",
+      "sha256": "7f7dde6e3c7155065edad61d6eff3e24d8289ea049e3b2f229597184131b9ba4",
+      "reject": "not-json",
+      "detect": "rule",
+      "description": "A document that is not JSON: the closing bracket is missing."
+    },
+    {
+      "id": "pipeline/reject-null-member",
+      "family": "pipeline",
+      "kind": "reject",
+      "file": "pipeline/reject-null-member.json",
+      "sha256": "97c2591761f8128384c1a1558d5830dcd1b556e8c0c3540b53a486a32c2fbaf6",
+      "reject": "null-member",
+      "detect": "schema",
+      "description": "A member whose value is null. Absence is structural: a member is omitted, never null."
+    },
+    {
+      "id": "pipeline/reject-repeated-member",
+      "family": "pipeline",
+      "kind": "reject",
+      "file": "pipeline/reject-repeated-member.json",
+      "sha256": "60b8f6032bf45ee643dceac9869e59e823139efa25b71aee0f261b9bf9f57649",
+      "reject": "repeated-member",
+      "detect": "rule",
+      "description": "One member named twice in one object: no ordering makes it deterministic."
+    },
+    {
+      "id": "pipeline/text",
+      "family": "pipeline",
+      "kind": "hash",
+      "file": "pipeline/text.json",
+      "sha256": "76bc35eabd5192a46aafd8681f6ff9ef7600fc3a35b5c26efef589a5a160e7e1",
+      "digest": "sha256:76bc35eabd5192a46aafd8681f6ff9ef7600fc3a35b5c26efef589a5a160e7e1",
+      "description": "A declared pipeline (`text`): see the specification's worked examples."
+    },
+    {
+      "id": "pipeline/window-pivot-unpivot",
+      "family": "pipeline",
+      "kind": "hash",
+      "file": "pipeline/window-pivot-unpivot.json",
+      "sha256": "04a2925891191681661451841f3a4dfb83b99637c3d3a182eb449ec12ab620db",
+      "digest": "sha256:04a2925891191681661451841f3a4dfb83b99637c3d3a182eb449ec12ab620db",
+      "description": "A declared pipeline (`window-pivot-unpivot`): see the specification's worked examples."
+    },
+    {
+      "id": "step/accept-std-errors-classical",
+      "family": "step",
+      "kind": "accept",
+      "file": "step/accept-std-errors-classical.json",
+      "sha256": "4ed398a9826fbf7fd3be9debd2603a6dee70f6269deb49d3f6a6294612f3420b",
+      "canonical": "[{\"$type\":\"fit\",\"control\":{\"maxIter\":25,\"tol\":1E-08},\"family\":\"gaussian\",\"groupBy\":[],\"intercept\":true,\"link\":\"identity\",\"output\":\"coefficients\",\"predictors\":[{\"expr\":{\"$type\":\"col\",\"name\":\"price\"},\"name\":\"price\"}],\"response\":\"sales\"}]",
+      "digest": "sha256:57e0819584ca8cab629c8beb3235c17a31e3e9aae101f26675066fbe255d558c",
+      "description": "A fit naming classical standard errors, which the canonical form says by omitting `stdErrors`."
+    },
+    {
+      "id": "step/accept-string-escapes",
+      "family": "step",
+      "kind": "accept",
+      "file": "step/accept-string-escapes.json",
+      "sha256": "8a5c1c51e3d387d49295ac37f34b41aa7911f52ea606b68f866bbf0e0eb90343",
+      "canonical": "[{\"$type\":\"derive\",\"expr\":{\"$type\":\"lit\",\"cell\":{\"$type\":\"Str\",\"value\":\"a/b\\u000acé\"}},\"name\":\"t\"}]",
+      "digest": "sha256:3f9735a42f192e3d8fec6b2ce97a3973511b92127c45c12abd03b9ed931a4923",
+      "description": "A string spelled with escapes the canonical form does not use (`\\/`, `\\n`, `\\u00e9`). The value is the same; the canonical text writes `/` and `é` literally and the line feed as `\\u000a`."
+    },
+    {
+      "id": "step/bootstrap",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/bootstrap.json",
+      "sha256": "5e30fd174bd1c0bb74cdd09b9d23d153c4c493d7836772838f34ed860ecf7113",
+      "digest": "sha256:5e30fd174bd1c0bb74cdd09b9d23d153c4c493d7836772838f34ed860ecf7113",
+      "case": "Transform.Bootstrap",
+      "description": "The wire-surface harness's document for Transform.Bootstrap: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/define",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/define.json",
+      "sha256": "57d7dcbe3ec06133efa6ca8fd6738904206beb251daf5ed89939e290044e87c9",
+      "digest": "sha256:57d7dcbe3ec06133efa6ca8fd6738904206beb251daf5ed89939e290044e87c9",
+      "case": "Transform.Define",
+      "description": "The wire-surface harness's document for Transform.Define: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/derive",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/derive.json",
+      "sha256": "b3514a2ef666dca1f77dd7d3a0afd8eb1e59c8cef2c9f41cc52aeb0fb64a435a",
+      "digest": "sha256:b3514a2ef666dca1f77dd7d3a0afd8eb1e59c8cef2c9f41cc52aeb0fb64a435a",
+      "case": "Transform.Derive",
+      "description": "The wire-surface harness's document for Transform.Derive: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/distinct",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/distinct.json",
+      "sha256": "a82d75f66b759246871af23ec87fbb425d2c136f262ecc7e601d7b61c0424436",
+      "digest": "sha256:a82d75f66b759246871af23ec87fbb425d2c136f262ecc7e601d7b61c0424436",
+      "case": "Transform.Distinct",
+      "description": "The wire-surface harness's document for Transform.Distinct: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/except",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/except.json",
+      "sha256": "b8e9f8b17a1c183350847b6d0fdd33ebe4235504574e6689c54729a1f7add2c9",
+      "digest": "sha256:b8e9f8b17a1c183350847b6d0fdd33ebe4235504574e6689c54729a1f7add2c9",
+      "case": "Transform.Except",
+      "description": "The wire-surface harness's document for Transform.Except: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/filter",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/filter.json",
+      "sha256": "550548d3d7bf089a8a45fcb797fe094f1cc6caa13de897c823d29bfbb14072b2",
+      "digest": "sha256:550548d3d7bf089a8a45fcb797fe094f1cc6caa13de897c823d29bfbb14072b2",
+      "case": "Transform.Filter",
+      "description": "The wire-surface harness's document for Transform.Filter: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/fit",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/fit.json",
+      "sha256": "07dd697c5668c29ce7e1cf55a8d6c8640f0f33daf8c6a6f291cfcc0dcf6862fb",
+      "digest": "sha256:07dd697c5668c29ce7e1cf55a8d6c8640f0f33daf8c6a6f291cfcc0dcf6862fb",
+      "case": "Transform.Fit",
+      "description": "The wire-surface harness's document for Transform.Fit: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/group-by",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/group-by.json",
+      "sha256": "05b7c7001feb50291d3c5e9579f953d4d506910e2433241a87984184a488dd05",
+      "digest": "sha256:05b7c7001feb50291d3c5e9579f953d4d506910e2433241a87984184a488dd05",
+      "case": "Transform.GroupBy",
+      "description": "The wire-surface harness's document for Transform.GroupBy: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/intersect",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/intersect.json",
+      "sha256": "a3cc2dfc4149e0c5c05ce7de3ec9f038f4a7354f37665d098966af053f80568e",
+      "digest": "sha256:a3cc2dfc4149e0c5c05ce7de3ec9f038f4a7354f37665d098966af053f80568e",
+      "case": "Transform.Intersect",
+      "description": "The wire-surface harness's document for Transform.Intersect: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/join",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/join.json",
+      "sha256": "3e0f57f3668b421bc2482114b82f4833df56254522aa4aa5bc4ba5124f0ee0c3",
+      "digest": "sha256:3e0f57f3668b421bc2482114b82f4833df56254522aa4aa5bc4ba5124f0ee0c3",
+      "case": "Transform.Join",
+      "description": "The wire-surface harness's document for Transform.Join: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/kmeans",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/kmeans.json",
+      "sha256": "8092ff7e6cc85e6c466911ddece97a80068c10bcad57c39039011d4ca82b07e1",
+      "digest": "sha256:8092ff7e6cc85e6c466911ddece97a80068c10bcad57c39039011d4ca82b07e1",
+      "case": "Transform.KMeans",
+      "description": "The wire-surface harness's document for Transform.KMeans: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/limit",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/limit.json",
+      "sha256": "a89acbf83d4e08390b27debe21648d33ad2001dcdda9f90a2c52d98479584630",
+      "digest": "sha256:a89acbf83d4e08390b27debe21648d33ad2001dcdda9f90a2c52d98479584630",
+      "case": "Transform.Limit",
+      "description": "The wire-surface harness's document for Transform.Limit: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/pivot",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/pivot.json",
+      "sha256": "bf94bc61de4bcad66bae3be0e1428f6b20bd2ac891d8949591a8c73ae37ce96c",
+      "digest": "sha256:bf94bc61de4bcad66bae3be0e1428f6b20bd2ac891d8949591a8c73ae37ce96c",
+      "case": "Transform.Pivot",
+      "description": "The wire-surface harness's document for Transform.Pivot: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/predict",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/predict.json",
+      "sha256": "86dce60ea876dda284920df5995a045ca1ae7f79f24f896a70ec27625b35328b",
+      "digest": "sha256:86dce60ea876dda284920df5995a045ca1ae7f79f24f896a70ec27625b35328b",
+      "case": "Transform.Predict",
+      "description": "The wire-surface harness's document for Transform.Predict: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/project",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/project.json",
+      "sha256": "eb65940d6ec1e1c409785c0374758974464bc0ff98e5cd79d5acd53e81f29c87",
+      "digest": "sha256:eb65940d6ec1e1c409785c0374758974464bc0ff98e5cd79d5acd53e81f29c87",
+      "case": "Transform.Project",
+      "description": "The wire-surface harness's document for Transform.Project: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/reject-fit-pair",
+      "family": "step",
+      "kind": "reject",
+      "file": "step/reject-fit-pair.json",
+      "sha256": "54a5d1a044261432ae6e29616431986c28cdd49465fc07fcbc799910ec40232c",
+      "reject": "invalid-value",
+      "detect": "rule",
+      "description": "A `fit` step naming a family and a link that are not an admitted pair."
+    },
+    {
+      "id": "step/reject-int-fraction",
+      "family": "step",
+      "kind": "reject",
+      "file": "step/reject-int-fraction.json",
+      "sha256": "a7309a079725ac4164c773dbf0da0b715e830cec64022d1f891bb6e8bd0ad75b",
+      "reject": "wrong-type",
+      "detect": "schema",
+      "description": "A 32-bit integer member holding a token with a fraction."
+    },
+    {
+      "id": "step/reject-int-out-of-range",
+      "family": "step",
+      "kind": "reject",
+      "file": "step/reject-int-out-of-range.json",
+      "sha256": "e6480eaf1d32e3afce44f05bbbc9c756b0b6daf2c98f6e0b1b79f84b8646759d",
+      "reject": "wrong-type",
+      "detect": "schema",
+      "description": "A 32-bit integer member holding a token outside the signed 32-bit range."
+    },
+    {
+      "id": "step/reject-missing-member",
+      "family": "step",
+      "kind": "reject",
+      "file": "step/reject-missing-member.json",
+      "sha256": "240b0e77d058c52fb71747b2c34b5f12949b191d9e24734200610bcdcdc45078",
+      "reject": "missing-member",
+      "detect": "schema",
+      "description": "A `derive` step without its required `expr` member."
+    },
+    {
+      "id": "step/reject-missing-type",
+      "family": "step",
+      "kind": "reject",
+      "file": "step/reject-missing-type.json",
+      "sha256": "e088a979088def0c9135e41031449f517648b0a869fd7be3d5dcbe6e775100c4",
+      "reject": "missing-member",
+      "detect": "schema",
+      "description": "A step with no `$type` discriminator."
+    },
+    {
+      "id": "step/reject-unknown-step",
+      "family": "step",
+      "kind": "reject",
+      "file": "step/reject-unknown-step.json",
+      "sha256": "a9178e7196aef573d2ee58c9e20def47c9f7d7f9ae4c95b8110657c0ae69fd76",
+      "reject": "unknown-tag",
+      "detect": "schema",
+      "description": "A step whose `$type` is not a registered step kind."
+    },
+    {
+      "id": "step/reject-wrong-type",
+      "family": "step",
+      "kind": "reject",
+      "file": "step/reject-wrong-type.json",
+      "sha256": "8dffbcaf81652607a96a16dcb7387d6bed0e2e2aed1aa297ee03c9de4992f53e",
+      "reject": "wrong-type",
+      "detect": "schema",
+      "description": "A `derive` step whose `name` is a number where a string is required."
+    },
+    {
+      "id": "step/sort",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/sort.json",
+      "sha256": "15e974c262fa119450bf35d8c663e45de6bc55c9e25effca8e2f5ab3508b09dc",
+      "digest": "sha256:15e974c262fa119450bf35d8c663e45de6bc55c9e25effca8e2f5ab3508b09dc",
+      "case": "Transform.Sort",
+      "description": "The wire-surface harness's document for Transform.Sort: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/union",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/union.json",
+      "sha256": "6266d136aab94b10a7e821042d65bfbc7799c1e54d94e44be61c47f58ad80fe6",
+      "digest": "sha256:6266d136aab94b10a7e821042d65bfbc7799c1e54d94e44be61c47f58ad80fe6",
+      "case": "Transform.Union",
+      "description": "The wire-surface harness's document for Transform.Union: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/unpivot",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/unpivot.json",
+      "sha256": "7f89c15c196f3895ab92fa96ae116a26c0837ddf68a8bb70e6db65d2302e9c67",
+      "digest": "sha256:7f89c15c196f3895ab92fa96ae116a26c0837ddf68a8bb70e6db65d2302e9c67",
+      "case": "Transform.Unpivot",
+      "description": "The wire-surface harness's document for Transform.Unpivot: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "step/window",
+      "family": "step",
+      "kind": "hash",
+      "file": "step/window.json",
+      "sha256": "9c797ca5218564ebedcb71032ecae025205204fb9ba8be22f6d9376004e60530",
+      "digest": "sha256:9c797ca5218564ebedcb71032ecae025205204fb9ba8be22f6d9376004e60530",
+      "case": "Transform.Window",
+      "description": "The wire-surface harness's document for Transform.Window: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/accept-unit-spelling",
+      "family": "expr",
+      "kind": "accept",
+      "file": "expr/accept-unit-spelling.json",
+      "sha256": "811efae4c46678deb3e13c40a49d5d0ae85faac7f5caed98851e7fab53cf688f",
+      "canonical": "[{\"$type\":\"derive\",\"expr\":{\"$type\":\"convert\",\"expr\":{\"$type\":\"col\",\"name\":\"force\"},\"unit\":\"kg.m/s2\"},\"name\":\"newtons\"}]",
+      "digest": "sha256:58fe2e7e39817a6abffd73683f87c28bd1d60cc81363a3f10663f3b01171b979",
+      "description": "A unit text the grammar parses that is not the unit's canonical text. A reader reads the unit; the canonical text is `kg.m/s2`."
+    },
+    {
+      "id": "expr/apply-fn",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/apply-fn.json",
+      "sha256": "fa769ad8a2e781d7551401bbc93581976e3521b8af2878d39ea865be16fbbc6a",
+      "digest": "sha256:fa769ad8a2e781d7551401bbc93581976e3521b8af2878d39ea865be16fbbc6a",
+      "case": "ColExpr.ApplyFn",
+      "description": "The wire-surface harness's document for ColExpr.ApplyFn: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/arg",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/arg.json",
+      "sha256": "9f7b93059f6c70dbe02cc530ff29ab24887c9ac0abeed34a49faddaf40f8bbfe",
+      "digest": "sha256:9f7b93059f6c70dbe02cc530ff29ab24887c9ac0abeed34a49faddaf40f8bbfe",
+      "case": "ColExpr.Arg",
+      "description": "The wire-surface harness's document for ColExpr.Arg: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/binary",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/binary.json",
+      "sha256": "5e13263399d2b7e350870e0445f07b9dd7767c903c0405499cb93e3732e15a9e",
+      "digest": "sha256:5e13263399d2b7e350870e0445f07b9dd7767c903c0405499cb93e3732e15a9e",
+      "case": "ColExpr.Binary",
+      "description": "The wire-surface harness's document for ColExpr.Binary: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/call",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/call.json",
+      "sha256": "65e54dadf3cc1cea1cd8d35b4d06f90fc7b5e3ea15d2fb065c820ce8e84781e3",
+      "digest": "sha256:65e54dadf3cc1cea1cd8d35b4d06f90fc7b5e3ea15d2fb065c820ce8e84781e3",
+      "case": "ColExpr.Call",
+      "description": "The wire-surface harness's document for ColExpr.Call: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/case",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/case.json",
+      "sha256": "6259ba6ea64173c2eaaf5168d546f62de7a3c7e12466e38d6fe9d226506b3cc9",
+      "digest": "sha256:6259ba6ea64173c2eaaf5168d546f62de7a3c7e12466e38d6fe9d226506b3cc9",
+      "case": "ColExpr.Case",
+      "description": "The wire-surface harness's document for ColExpr.Case: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/cast",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/cast.json",
+      "sha256": "1d6502b1a5723afd2cc7714c00262cb11a4f2f7e3fda04ad313590ec78e499c0",
+      "digest": "sha256:1d6502b1a5723afd2cc7714c00262cb11a4f2f7e3fda04ad313590ec78e499c0",
+      "case": "ColExpr.Cast",
+      "description": "The wire-surface harness's document for ColExpr.Cast: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/coalesce",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/coalesce.json",
+      "sha256": "01a7328c483f0c5f0c4c5a5f1c2c8687821a9f59813c8e9758304110b10dcaec",
+      "digest": "sha256:01a7328c483f0c5f0c4c5a5f1c2c8687821a9f59813c8e9758304110b10dcaec",
+      "case": "ColExpr.Coalesce",
+      "description": "The wire-surface harness's document for ColExpr.Coalesce: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/col",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/col.json",
+      "sha256": "550548d3d7bf089a8a45fcb797fe094f1cc6caa13de897c823d29bfbb14072b2",
+      "digest": "sha256:550548d3d7bf089a8a45fcb797fe094f1cc6caa13de897c823d29bfbb14072b2",
+      "case": "ColExpr.Col",
+      "description": "The wire-surface harness's document for ColExpr.Col: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/convert",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/convert.json",
+      "sha256": "e287e7a3ffd82a13c844d6ab5cb0bce4c279d7847f5377cf6f1a4599cede13b6",
+      "digest": "sha256:e287e7a3ffd82a13c844d6ab5cb0bce4c279d7847f5377cf6f1a4599cede13b6",
+      "case": "ColExpr.Convert",
+      "description": "The wire-surface harness's document for ColExpr.Convert: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/in-list",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/in-list.json",
+      "sha256": "fc265fdd767d02f4731317c57d5a739f29e8bd5b3b804d60d21d410cc45d107e",
+      "digest": "sha256:fc265fdd767d02f4731317c57d5a739f29e8bd5b3b804d60d21d410cc45d107e",
+      "case": "ColExpr.InList",
+      "description": "The wire-surface harness's document for ColExpr.InList: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/in-param",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/in-param.json",
+      "sha256": "d7ab28e96919b87121633ee1147d5aa5a2a878e8754adc079408c202fc7d4db9",
+      "digest": "sha256:d7ab28e96919b87121633ee1147d5aa5a2a878e8754adc079408c202fc7d4db9",
+      "case": "ColExpr.InParam",
+      "description": "The wire-surface harness's document for ColExpr.InParam: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/interpolate",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/interpolate.json",
+      "sha256": "13bd572b6cea3739932671247a880636d2022b67c87adb5c717850ebfd2ed168",
+      "digest": "sha256:13bd572b6cea3739932671247a880636d2022b67c87adb5c717850ebfd2ed168",
+      "case": "ColExpr.Interpolate",
+      "description": "The wire-surface harness's document for ColExpr.Interpolate: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/is-null",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/is-null.json",
+      "sha256": "7f63fba36bc2d61510238d3a869dbc3e11c70c91f94cb3723d7ce6282eabd24d",
+      "digest": "sha256:7f63fba36bc2d61510238d3a869dbc3e11c70c91f94cb3723d7ce6282eabd24d",
+      "case": "ColExpr.IsNull",
+      "description": "The wire-surface harness's document for ColExpr.IsNull: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/lit",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/lit.json",
+      "sha256": "fb1eeb4dbad400d85359b80d02114505412746338613f7d037d3ab58cd247466",
+      "digest": "sha256:fb1eeb4dbad400d85359b80d02114505412746338613f7d037d3ab58cd247466",
+      "case": "ColExpr.Lit",
+      "description": "The wire-surface harness's document for ColExpr.Lit: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/not",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/not.json",
+      "sha256": "66b044dbbf745b1ae5cf974320c3e00e515001bb65940760f329216cd96666a8",
+      "digest": "sha256:66b044dbbf745b1ae5cf974320c3e00e515001bb65940760f329216cd96666a8",
+      "case": "ColExpr.Not",
+      "description": "The wire-surface harness's document for ColExpr.Not: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/now",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/now.json",
+      "sha256": "827924443c9d3223699b1ebce59f96709f5f45e42895864032fe59601f70e417",
+      "digest": "sha256:827924443c9d3223699b1ebce59f96709f5f45e42895864032fe59601f70e417",
+      "case": "ColExpr.Now",
+      "description": "The wire-surface harness's document for ColExpr.Now: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/param",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/param.json",
+      "sha256": "54824a81997b373d0b6d3d21497006a3f2ed3b430650fffacd39545b077fc39e",
+      "digest": "sha256:54824a81997b373d0b6d3d21497006a3f2ed3b430650fffacd39545b077fc39e",
+      "case": "ColExpr.Param",
+      "description": "The wire-surface harness's document for ColExpr.Param: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/quotient",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/quotient.json",
+      "sha256": "3b3d33b8a98f41efc7c5f363f074b5ff6d1361b8d686807e45a7ccf6dee60267",
+      "digest": "sha256:3b3d33b8a98f41efc7c5f363f074b5ff6d1361b8d686807e45a7ccf6dee60267",
+      "case": "ColExpr.Quotient",
+      "description": "The wire-surface harness's document for ColExpr.Quotient: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "expr/reject-unit-text",
+      "family": "expr",
+      "kind": "reject",
+      "file": "expr/reject-unit-text.json",
+      "sha256": "990cd38668c67d614c1dd7f9774f37ae70016b97afe65891f36a60db506195ae",
+      "reject": "invalid-value",
+      "detect": "rule",
+      "description": "A `convert` expression whose `unit` is not unit text."
+    },
+    {
+      "id": "expr/reject-unknown-expr",
+      "family": "expr",
+      "kind": "reject",
+      "file": "expr/reject-unknown-expr.json",
+      "sha256": "5459d49da3ad6cff9a66822de9db2e67dbd08a0fd0c95de5f05aa37a957d0292",
+      "reject": "unknown-tag",
+      "detect": "schema",
+      "description": "An expression whose `$type` is not a registered expression kind."
+    },
+    {
+      "id": "expr/rounded",
+      "family": "expr",
+      "kind": "hash",
+      "file": "expr/rounded.json",
+      "sha256": "3f3017ac46e68c14151fd0dbd3ee4470d6585aa886dae9ad0ec7ea8f77a572a1",
+      "digest": "sha256:3f3017ac46e68c14151fd0dbd3ee4470d6585aa886dae9ad0ec7ea8f77a572a1",
+      "case": "ColExpr.Rounded",
+      "description": "The wire-surface harness's document for ColExpr.Rounded: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "cell/accept-decimal-integer-token",
+      "family": "cell",
+      "kind": "accept",
+      "file": "cell/accept-decimal-integer-token.json",
+      "sha256": "13807c3f47f9c8ec9dcd241c672e25c1518f5c975249568a311fb8ad4981679d",
+      "canonical": "[{\"$type\":\"filter\",\"pred\":{\"$type\":\"lit\",\"cell\":{\"$type\":\"Decimal\",\"value\":\"7\"}}}]",
+      "digest": "sha256:e97973b50c665755a98ae603056d35831e97aa290825c5256ce41ab2e1e9b740",
+      "description": "A decimal written as an integer token, which is exact. The canonical text is the string `\"7\"`."
+    },
+    {
+      "id": "cell/accept-decimal-text",
+      "family": "cell",
+      "kind": "accept",
+      "file": "cell/accept-decimal-text.json",
+      "sha256": "ca8380841520972d77ee2e0034348b7665495888e78eb2066c0f6534ad375d2b",
+      "canonical": "[{\"$type\":\"filter\",\"pred\":{\"$type\":\"lit\",\"cell\":{\"$type\":\"Decimal\",\"value\":\"12.5\"}}}]",
+      "digest": "sha256:5f8fa4f4ed80cb8b0711597955849c2c6a54051a1c0a34d6a5221f091996bdcf",
+      "description": "Decimal text with a leading and a trailing zero. A reader reads the number it names; the canonical text is `12.5`."
+    },
+    {
+      "id": "cell/accept-float-layout",
+      "family": "cell",
+      "kind": "accept",
+      "file": "cell/accept-float-layout.json",
+      "sha256": "61d281242961b181e039902bc8a421bcd443de79167df88cf309f625937339d2",
+      "canonical": "[{\"$type\":\"filter\",\"pred\":{\"$type\":\"lit\",\"cell\":{\"$type\":\"Float\",\"value\":1E-05}}}]",
+      "digest": "sha256:fd133b0ffc020f0f2520c360cd8bb0f09e164a6247c5986366f16224184d35bb",
+      "description": "A float token in a layout other than the canonical one. The canonical layout of the same double is `1E-05`."
+    },
+    {
+      "id": "cell/bool",
+      "family": "cell",
+      "kind": "hash",
+      "file": "cell/bool.json",
+      "sha256": "860d28e72325ff8102b1fc6022889924acfba07353d51e44d1be8906b8330130",
+      "digest": "sha256:860d28e72325ff8102b1fc6022889924acfba07353d51e44d1be8906b8330130",
+      "case": "Cell.Bool",
+      "description": "The wire-surface harness's document for Cell.Bool: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "cell/date",
+      "family": "cell",
+      "kind": "hash",
+      "file": "cell/date.json",
+      "sha256": "c664fd501e6ef70afc95bb6641e621a0a7144eff2baec6321cb495872e607912",
+      "digest": "sha256:c664fd501e6ef70afc95bb6641e621a0a7144eff2baec6321cb495872e607912",
+      "case": "Cell.Date",
+      "description": "The wire-surface harness's document for Cell.Date: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "cell/decimal",
+      "family": "cell",
+      "kind": "hash",
+      "file": "cell/decimal.json",
+      "sha256": "5f8fa4f4ed80cb8b0711597955849c2c6a54051a1c0a34d6a5221f091996bdcf",
+      "digest": "sha256:5f8fa4f4ed80cb8b0711597955849c2c6a54051a1c0a34d6a5221f091996bdcf",
+      "case": "Cell.Decimal",
+      "description": "The wire-surface harness's document for Cell.Decimal: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "cell/float",
+      "family": "cell",
+      "kind": "hash",
+      "file": "cell/float.json",
+      "sha256": "a0da6064ccb2d2cfba23ff2b04e97f97ab3ce292d17ad518dba69f0036272753",
+      "digest": "sha256:a0da6064ccb2d2cfba23ff2b04e97f97ab3ce292d17ad518dba69f0036272753",
+      "case": "Cell.Float",
+      "description": "The wire-surface harness's document for Cell.Float: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "cell/int",
+      "family": "cell",
+      "kind": "hash",
+      "file": "cell/int.json",
+      "sha256": "fb1eeb4dbad400d85359b80d02114505412746338613f7d037d3ab58cd247466",
+      "digest": "sha256:fb1eeb4dbad400d85359b80d02114505412746338613f7d037d3ab58cd247466",
+      "case": "Cell.Int",
+      "description": "The wire-surface harness's document for Cell.Int: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "cell/null",
+      "family": "cell",
+      "kind": "hash",
+      "file": "cell/null.json",
+      "sha256": "4fcb7645484b6375343e53572c12603ce813f6a4879b68469fcb5231129cc7fa",
+      "digest": "sha256:4fcb7645484b6375343e53572c12603ce813f6a4879b68469fcb5231129cc7fa",
+      "case": "Cell.Null",
+      "description": "The wire-surface harness's document for Cell.Null: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "cell/reject-date-calendar",
+      "family": "cell",
+      "kind": "reject",
+      "file": "cell/reject-date-calendar.json",
+      "sha256": "ceb0dee81a53eea9a508d20f751fc9ecdf1c4bccc354072ce6bd65298102d4e4",
+      "reject": "invalid-value",
+      "detect": "rule",
+      "description": "A `Date` cell of the right shape naming a day the calendar does not have."
+    },
+    {
+      "id": "cell/reject-date-text",
+      "family": "cell",
+      "kind": "reject",
+      "file": "cell/reject-date-text.json",
+      "sha256": "9ece0a5e53ccaeb6af7c46ca2c9ddca14fedc115b93d006cd6e092ca2ef35d88",
+      "reject": "invalid-value",
+      "detect": "schema",
+      "description": "A `Date` cell whose value is not the date's canonical text."
+    },
+    {
+      "id": "cell/reject-decimal-text",
+      "family": "cell",
+      "kind": "reject",
+      "file": "cell/reject-decimal-text.json",
+      "sha256": "4964f2067c61ba8453e4bd655fa8da9af9e599ff6ed1f26da8db0669b763cf32",
+      "reject": "invalid-value",
+      "detect": "schema",
+      "description": "A `Decimal` cell whose value carries an exponent."
+    },
+    {
+      "id": "cell/reject-non-finite",
+      "family": "cell",
+      "kind": "reject",
+      "file": "cell/reject-non-finite.json",
+      "sha256": "ab64e0633070864839d7e0220cd67cc502fd26c6e28b9167896539fed2fff4ac",
+      "reject": "wrong-type",
+      "detect": "schema",
+      "description": "A `Float` cell carrying a quoted non-finite token. No pipeline document carries a non-finite float."
+    },
+    {
+      "id": "cell/reject-timestamp-text",
+      "family": "cell",
+      "kind": "reject",
+      "file": "cell/reject-timestamp-text.json",
+      "sha256": "c6f57fde245f23376e55eaaee052288067df36e86758ed6cbd499eb50b5ec779",
+      "reject": "invalid-value",
+      "detect": "schema",
+      "description": "A `Timestamp` cell whose value is not the instant's canonical text."
+    },
+    {
+      "id": "cell/reject-timestamp-trailing-zero",
+      "family": "cell",
+      "kind": "reject",
+      "file": "cell/reject-timestamp-trailing-zero.json",
+      "sha256": "4b0f1e2eac5548f928d0bd2850f1f2db55ab1ad9e64eff22dfe326f78d14d4fc",
+      "reject": "invalid-value",
+      "detect": "schema",
+      "description": "A `Timestamp` cell whose fraction ends in a zero: one instant has one text."
+    },
+    {
+      "id": "cell/reject-unknown-cell",
+      "family": "cell",
+      "kind": "reject",
+      "file": "cell/reject-unknown-cell.json",
+      "sha256": "1d02c54a7010d91a92b51b875d2448df41b4928b73ac42d88bd37c741cdd285b",
+      "reject": "unknown-tag",
+      "detect": "schema",
+      "description": "A cell whose `$type` is not a registered cell kind."
+    },
+    {
+      "id": "cell/str",
+      "family": "cell",
+      "kind": "hash",
+      "file": "cell/str.json",
+      "sha256": "50d054d97429c84acc9865aa4f066703ef843bf7b1881c8939ee728bb59dfd6d",
+      "digest": "sha256:50d054d97429c84acc9865aa4f066703ef843bf7b1881c8939ee728bb59dfd6d",
+      "case": "Cell.Str",
+      "description": "The wire-surface harness's document for Cell.Str: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "cell/timestamp",
+      "family": "cell",
+      "kind": "hash",
+      "file": "cell/timestamp.json",
+      "sha256": "055e7705f273e70cda75967c6941aa99d6a6d7a2e87191073629bad11d4b3d1e",
+      "digest": "sha256:055e7705f273e70cda75967c6941aa99d6a6d7a2e87191073629bad11d4b3d1e",
+      "case": "Cell.Timestamp",
+      "description": "The wire-surface harness's document for Cell.Timestamp: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "slot/cell-lit",
+      "family": "slot",
+      "kind": "hash",
+      "file": "slot/cell-lit.json",
+      "sha256": "57d7dcbe3ec06133efa6ca8fd6738904206beb251daf5ed89939e290044e87c9",
+      "digest": "sha256:57d7dcbe3ec06133efa6ca8fd6738904206beb251daf5ed89939e290044e87c9",
+      "case": "Slot<Cell>.Lit",
+      "description": "The wire-surface harness's document for Slot<Cell>.Lit: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "slot/cell-param",
+      "family": "slot",
+      "kind": "hash",
+      "file": "slot/cell-param.json",
+      "sha256": "4561499542c361fc5de47dc4857b5a18889b7a3ce5c4e826a9117ded4e569f37",
+      "digest": "sha256:4561499542c361fc5de47dc4857b5a18889b7a3ce5c4e826a9117ded4e569f37",
+      "case": "Slot<Cell>.Param",
+      "description": "The wire-surface harness's document for Slot<Cell>.Param: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "slot/double-lit",
+      "family": "slot",
+      "kind": "hash",
+      "file": "slot/double-lit.json",
+      "sha256": "07dd697c5668c29ce7e1cf55a8d6c8640f0f33daf8c6a6f291cfcc0dcf6862fb",
+      "digest": "sha256:07dd697c5668c29ce7e1cf55a8d6c8640f0f33daf8c6a6f291cfcc0dcf6862fb",
+      "case": "Slot<Double>.Lit",
+      "description": "The wire-surface harness's document for Slot<Double>.Lit: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "slot/double-param",
+      "family": "slot",
+      "kind": "hash",
+      "file": "slot/double-param.json",
+      "sha256": "db6b9888723e60f72883351f8864939e909b8ccef9d163c913557020de3e410c",
+      "digest": "sha256:db6b9888723e60f72883351f8864939e909b8ccef9d163c913557020de3e410c",
+      "case": "Slot<Double>.Param",
+      "description": "The wire-surface harness's document for Slot<Double>.Param: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "slot/int32-lit",
+      "family": "slot",
+      "kind": "hash",
+      "file": "slot/int32-lit.json",
+      "sha256": "3b3d33b8a98f41efc7c5f363f074b5ff6d1361b8d686807e45a7ccf6dee60267",
+      "digest": "sha256:3b3d33b8a98f41efc7c5f363f074b5ff6d1361b8d686807e45a7ccf6dee60267",
+      "case": "Slot<Int32>.Lit",
+      "description": "The wire-surface harness's document for Slot<Int32>.Lit: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "slot/int32-param",
+      "family": "slot",
+      "kind": "hash",
+      "file": "slot/int32-param.json",
+      "sha256": "023fff388a16a328dd363ddcabef696556649ab3708e6a047c0d37d94cf0ad20",
+      "digest": "sha256:023fff388a16a328dd363ddcabef696556649ab3708e6a047c0d37d94cf0ad20",
+      "case": "Slot<Int32>.Param",
+      "description": "The wire-surface harness's document for Slot<Int32>.Param: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "slot/int64-lit",
+      "family": "slot",
+      "kind": "hash",
+      "file": "slot/int64-lit.json",
+      "sha256": "8092ff7e6cc85e6c466911ddece97a80068c10bcad57c39039011d4ca82b07e1",
+      "digest": "sha256:8092ff7e6cc85e6c466911ddece97a80068c10bcad57c39039011d4ca82b07e1",
+      "case": "Slot<Int64>.Lit",
+      "description": "The wire-surface harness's document for Slot<Int64>.Lit: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "slot/int64-param",
+      "family": "slot",
+      "kind": "hash",
+      "file": "slot/int64-param.json",
+      "sha256": "56f6db386899843edc0dfba680630d39a1f020fc83cc0a2a61873416d7da5bfb",
+      "digest": "sha256:56f6db386899843edc0dfba680630d39a1f020fc83cc0a2a61873416d7da5bfb",
+      "case": "Slot<Int64>.Param",
+      "description": "The wire-surface harness's document for Slot<Int64>.Param: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "slot/reject-param-name",
+      "family": "slot",
+      "kind": "reject",
+      "file": "slot/reject-param-name.json",
+      "sha256": "38f8568b7eb893803a7d2846b903fca08aa6134ce2d88ab01f67b7ad11edc795",
+      "reject": "wrong-type",
+      "detect": "schema",
+      "description": "A parameter slot whose `$param` is not a string."
+    },
+    {
+      "id": "slot/reject-seed-leading-zero",
+      "family": "slot",
+      "kind": "reject",
+      "file": "slot/reject-seed-leading-zero.json",
+      "sha256": "7a0b12dc2c9562eea907c009a2d635990dcecd4e74925389b07fe3fbe31a1bd3",
+      "reject": "invalid-value",
+      "detect": "schema",
+      "description": "A seed whose digits carry a leading zero: one integer has one text."
+    },
+    {
+      "id": "slot/reject-seed-number",
+      "family": "slot",
+      "kind": "reject",
+      "file": "slot/reject-seed-number.json",
+      "sha256": "84502ad52a13d4783fdde51a946ff21b7f5c09ec216a3d19fb4f286729e9487a",
+      "reject": "wrong-type",
+      "detect": "schema",
+      "description": "A seed written as a JSON number. A seed is a 64-bit integer and travels as its decimal digits in a string."
+    },
+    {
+      "id": "slot/reject-seed-out-of-range",
+      "family": "slot",
+      "kind": "reject",
+      "file": "slot/reject-seed-out-of-range.json",
+      "sha256": "e3c334b57028bdf7fcd835a9ec9fbd1f858f1ea39f489db247d19b44bf1fbe6b",
+      "reject": "invalid-value",
+      "detect": "rule",
+      "description": "A seed one past the signed 64-bit range."
+    },
+    {
+      "id": "slot/string-lit",
+      "family": "slot",
+      "kind": "hash",
+      "file": "slot/string-lit.json",
+      "sha256": "15e974c262fa119450bf35d8c663e45de6bc55c9e25effca8e2f5ab3508b09dc",
+      "digest": "sha256:15e974c262fa119450bf35d8c663e45de6bc55c9e25effca8e2f5ab3508b09dc",
+      "case": "Slot<String>.Lit",
+      "description": "The wire-surface harness's document for Slot<String>.Lit: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "slot/string-param",
+      "family": "slot",
+      "kind": "hash",
+      "file": "slot/string-param.json",
+      "sha256": "3ffca3a7d6b06729981b67245d8dd7742d286416aef0447f85ec8298ab2348c8",
+      "digest": "sha256:3ffca3a7d6b06729981b67245d8dd7742d286416aef0447f85ec8298ab2348c8",
+      "case": "Slot<String>.Param",
+      "description": "The wire-surface harness's document for Slot<String>.Param: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/aggfn-count",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/aggfn-count.json",
+      "sha256": "da304afcc9a509331438f6e1935f5d6da8b2571473b82423518c6a8819b82c8e",
+      "digest": "sha256:da304afcc9a509331438f6e1935f5d6da8b2571473b82423518c6a8819b82c8e",
+      "case": "AggFn.Count",
+      "description": "The wire-surface harness's document for AggFn.Count: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/aggfn-count-distinct",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/aggfn-count-distinct.json",
+      "sha256": "b7eed063d04d14cb71106071777d52903f178c9cd174abaecf86db95baad1471",
+      "digest": "sha256:b7eed063d04d14cb71106071777d52903f178c9cd174abaecf86db95baad1471",
+      "case": "AggFn.CountDistinct",
+      "description": "The wire-surface harness's document for AggFn.CountDistinct: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/aggfn-first",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/aggfn-first.json",
+      "sha256": "01de8a35eef9edb5b26a7a22e39c7bf3eabcab3799ca82047c06a2832191dd69",
+      "digest": "sha256:01de8a35eef9edb5b26a7a22e39c7bf3eabcab3799ca82047c06a2832191dd69",
+      "case": "AggFn.First",
+      "description": "The wire-surface harness's document for AggFn.First: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/aggfn-last",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/aggfn-last.json",
+      "sha256": "857059c62f6ac37a880cef89130dbf393b66b6d57fb287af55e6b0f3243c64b7",
+      "digest": "sha256:857059c62f6ac37a880cef89130dbf393b66b6d57fb287af55e6b0f3243c64b7",
+      "case": "AggFn.Last",
+      "description": "The wire-surface harness's document for AggFn.Last: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/aggfn-max",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/aggfn-max.json",
+      "sha256": "e5e20b935565c869c9e8a57aefa3d7eef4642b4d0cdf4eb245fb742c0d68f6e5",
+      "digest": "sha256:e5e20b935565c869c9e8a57aefa3d7eef4642b4d0cdf4eb245fb742c0d68f6e5",
+      "case": "AggFn.Max",
+      "description": "The wire-surface harness's document for AggFn.Max: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/aggfn-mean",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/aggfn-mean.json",
+      "sha256": "27eb48d1abae01bd52d0904f1a30b278fd7dedd4ccc4b5c256e20cf04e3531f9",
+      "digest": "sha256:27eb48d1abae01bd52d0904f1a30b278fd7dedd4ccc4b5c256e20cf04e3531f9",
+      "case": "AggFn.Mean",
+      "description": "The wire-surface harness's document for AggFn.Mean: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/aggfn-median",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/aggfn-median.json",
+      "sha256": "00251c29f5d5f6554348ed96a747cb60b8de005b537f09974492b7d88914913b",
+      "digest": "sha256:00251c29f5d5f6554348ed96a747cb60b8de005b537f09974492b7d88914913b",
+      "case": "AggFn.Median",
+      "description": "The wire-surface harness's document for AggFn.Median: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/aggfn-min",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/aggfn-min.json",
+      "sha256": "0f344c061731e15f9808b0a9d28d5ec04f23ce5b6229425557d33891b3b3323c",
+      "digest": "sha256:0f344c061731e15f9808b0a9d28d5ec04f23ce5b6229425557d33891b3b3323c",
+      "case": "AggFn.Min",
+      "description": "The wire-surface harness's document for AggFn.Min: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/aggfn-std-dev",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/aggfn-std-dev.json",
+      "sha256": "a1f853dcae5a9d5df02013695f188f035484f4344b8f9bda8eaefcd8b06365b2",
+      "digest": "sha256:a1f853dcae5a9d5df02013695f188f035484f4344b8f9bda8eaefcd8b06365b2",
+      "case": "AggFn.StdDev",
+      "description": "The wire-surface harness's document for AggFn.StdDev: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/aggfn-sum",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/aggfn-sum.json",
+      "sha256": "05b7c7001feb50291d3c5e9579f953d4d506910e2433241a87984184a488dd05",
+      "digest": "sha256:05b7c7001feb50291d3c5e9579f953d4d506910e2433241a87984184a488dd05",
+      "case": "AggFn.Sum",
+      "description": "The wire-surface harness's document for AggFn.Sum: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/binop-add",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/binop-add.json",
+      "sha256": "5e13263399d2b7e350870e0445f07b9dd7767c903c0405499cb93e3732e15a9e",
+      "digest": "sha256:5e13263399d2b7e350870e0445f07b9dd7767c903c0405499cb93e3732e15a9e",
+      "case": "BinOp.Add",
+      "description": "The wire-surface harness's document for BinOp.Add: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/binop-and",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/binop-and.json",
+      "sha256": "8bfbb26a3663159a67ee082df772cbc4a677f1c2384edccd8d128453cc18f880",
+      "digest": "sha256:8bfbb26a3663159a67ee082df772cbc4a677f1c2384edccd8d128453cc18f880",
+      "case": "BinOp.And",
+      "description": "The wire-surface harness's document for BinOp.And: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/binop-contains",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/binop-contains.json",
+      "sha256": "361ee80fd2e0d60de981aef786e889bb601f387f303971139410a17327622d71",
+      "digest": "sha256:361ee80fd2e0d60de981aef786e889bb601f387f303971139410a17327622d71",
+      "case": "BinOp.Contains",
+      "description": "The wire-surface harness's document for BinOp.Contains: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/binop-div",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/binop-div.json",
+      "sha256": "63e56ab8092807332cad71b8f1b5b576874aa1496e314e327fe1a4be1b54c6c0",
+      "digest": "sha256:63e56ab8092807332cad71b8f1b5b576874aa1496e314e327fe1a4be1b54c6c0",
+      "case": "BinOp.Div",
+      "description": "The wire-surface harness's document for BinOp.Div: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/binop-ends-with",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/binop-ends-with.json",
+      "sha256": "0cc503ffab58f67c9933c503a4ee366a3ad2aaff607a507bbd5965189bd215b2",
+      "digest": "sha256:0cc503ffab58f67c9933c503a4ee366a3ad2aaff607a507bbd5965189bd215b2",
+      "case": "BinOp.EndsWith",
+      "description": "The wire-surface harness's document for BinOp.EndsWith: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/binop-eq",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/binop-eq.json",
+      "sha256": "523e485f3fef4c7778feef9a736baad6ff5245e14887411e4b4061de5d1f8494",
+      "digest": "sha256:523e485f3fef4c7778feef9a736baad6ff5245e14887411e4b4061de5d1f8494",
+      "case": "BinOp.Eq",
+      "description": "The wire-surface harness's document for BinOp.Eq: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/binop-ge",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/binop-ge.json",
+      "sha256": "42bd5b185cdce52740ca65504969fa00587f836362b4cf61e9940fd1965a9d1d",
+      "digest": "sha256:42bd5b185cdce52740ca65504969fa00587f836362b4cf61e9940fd1965a9d1d",
+      "case": "BinOp.Ge",
+      "description": "The wire-surface harness's document for BinOp.Ge: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/binop-gt",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/binop-gt.json",
+      "sha256": "a4c5c96599bb1781cd833c9c755213fb8c96e0a0ec4919681f670165cf462829",
+      "digest": "sha256:a4c5c96599bb1781cd833c9c755213fb8c96e0a0ec4919681f670165cf462829",
+      "case": "BinOp.Gt",
+      "description": "The wire-surface harness's document for BinOp.Gt: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/binop-le",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/binop-le.json",
+      "sha256": "c8b86a986be1320b9bdef982bfcd1bdb4d9711ca2a9aef816c6f4535f9de8713",
+      "digest": "sha256:c8b86a986be1320b9bdef982bfcd1bdb4d9711ca2a9aef816c6f4535f9de8713",
+      "case": "BinOp.Le",
+      "description": "The wire-surface harness's document for BinOp.Le: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/binop-lt",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/binop-lt.json",
+      "sha256": "03663ef5af76f9c67f11ed5b617fd5665ecd74d5808b25e0aca0578d3f9f0762",
+      "digest": "sha256:03663ef5af76f9c67f11ed5b617fd5665ecd74d5808b25e0aca0578d3f9f0762",
+      "case": "BinOp.Lt",
+      "description": "The wire-surface harness's document for BinOp.Lt: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/binop-mod",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/binop-mod.json",
+      "sha256": "2477dc5bd77f2ba5e8533211413767aeb1e4614b74eb85644d3fb063d3ebee42",
+      "digest": "sha256:2477dc5bd77f2ba5e8533211413767aeb1e4614b74eb85644d3fb063d3ebee42",
+      "case": "BinOp.Mod",
+      "description": "The wire-surface harness's document for BinOp.Mod: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/binop-mul",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/binop-mul.json",
+      "sha256": "c15efcfba5eeedef9c494963c49d9abbcbd261d6a6b68efc76fd99a4bff32496",
+      "digest": "sha256:c15efcfba5eeedef9c494963c49d9abbcbd261d6a6b68efc76fd99a4bff32496",
+      "case": "BinOp.Mul",
+      "description": "The wire-surface harness's document for BinOp.Mul: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/binop-ne",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/binop-ne.json",
+      "sha256": "1b73c4c251c8e70882c0ffbf94c1d3cf630e83549762e83d963993acee9a74c9",
+      "digest": "sha256:1b73c4c251c8e70882c0ffbf94c1d3cf630e83549762e83d963993acee9a74c9",
+      "case": "BinOp.Ne",
+      "description": "The wire-surface harness's document for BinOp.Ne: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/binop-or",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/binop-or.json",
+      "sha256": "9a67fa6ba6398f8ffef35099c9dc3b67e7cdd9e793b3fe625c97ee2c015bab2d",
+      "digest": "sha256:9a67fa6ba6398f8ffef35099c9dc3b67e7cdd9e793b3fe625c97ee2c015bab2d",
+      "case": "BinOp.Or",
+      "description": "The wire-surface harness's document for BinOp.Or: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/binop-starts-with",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/binop-starts-with.json",
+      "sha256": "b114bfc342755df510b4b0a11a02a6b5fc2b2e45c4d8919ef981a3aabbd40919",
+      "digest": "sha256:b114bfc342755df510b4b0a11a02a6b5fc2b2e45c4d8919ef981a3aabbd40919",
+      "case": "BinOp.StartsWith",
+      "description": "The wire-surface harness's document for BinOp.StartsWith: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/binop-sub",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/binop-sub.json",
+      "sha256": "9cb5f256b7f9ac53287e4357c9924f8ba6e696c8efa4804106d6306119afd814",
+      "digest": "sha256:9cb5f256b7f9ac53287e4357c9924f8ba6e696c8efa4804106d6306119afd814",
+      "case": "BinOp.Sub",
+      "description": "The wire-surface harness's document for BinOp.Sub: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/bootstrapoutput-replicates",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/bootstrapoutput-replicates.json",
+      "sha256": "5e30fd174bd1c0bb74cdd09b9d23d153c4c493d7836772838f34ed860ecf7113",
+      "digest": "sha256:5e30fd174bd1c0bb74cdd09b9d23d153c4c493d7836772838f34ed860ecf7113",
+      "case": "BootstrapOutput.Replicates",
+      "description": "The wire-surface harness's document for BootstrapOutput.Replicates: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/bootstrapoutput-summary",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/bootstrapoutput-summary.json",
+      "sha256": "1fa61d739e79d2416fb7644c1e8c14d6d7809f3a3cf9af78ef004f20301024cf",
+      "digest": "sha256:1fa61d739e79d2416fb7644c1e8c14d6d7809f3a3cf9af78ef004f20301024cf",
+      "case": "BootstrapOutput.Summary",
+      "description": "The wire-surface harness's document for BootstrapOutput.Summary: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/cast-type-bool",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/cast-type-bool.json",
+      "sha256": "44c36352130847da9cba9f993fa74cdf0cdf4e2a92df2befd95f8befced75f64",
+      "digest": "sha256:44c36352130847da9cba9f993fa74cdf0cdf4e2a92df2befd95f8befced75f64",
+      "case": "ColExpr.Cast",
+      "description": "A `cast` to the column type `bool`, by its tag."
+    },
+    {
+      "id": "token/cast-type-date",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/cast-type-date.json",
+      "sha256": "52bc7255fe9f16d569d719e0d6a8e5dd2c0b81088d2520f706028a75bc5b00cb",
+      "digest": "sha256:52bc7255fe9f16d569d719e0d6a8e5dd2c0b81088d2520f706028a75bc5b00cb",
+      "case": "ColExpr.Cast",
+      "description": "A `cast` to the column type `date`, by its tag."
+    },
+    {
+      "id": "token/cast-type-decimal",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/cast-type-decimal.json",
+      "sha256": "31f99493f8f05acb5b7cc26b760d290ebde8147aaa06049fd50c402d19743af1",
+      "digest": "sha256:31f99493f8f05acb5b7cc26b760d290ebde8147aaa06049fd50c402d19743af1",
+      "case": "ColExpr.Cast",
+      "description": "A `cast` to the column type `decimal`, by its tag."
+    },
+    {
+      "id": "token/cast-type-float",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/cast-type-float.json",
+      "sha256": "6cce01510f58bccc6eb24a4ed6309bc913f7ba6bcc9a5f00b270bf70e328a616",
+      "digest": "sha256:6cce01510f58bccc6eb24a4ed6309bc913f7ba6bcc9a5f00b270bf70e328a616",
+      "case": "ColExpr.Cast",
+      "description": "A `cast` to the column type `float`, by its tag."
+    },
+    {
+      "id": "token/cast-type-int",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/cast-type-int.json",
+      "sha256": "e0fd55199b67b4cb71b77549eb0a3835aa7b7ed94e8a42cd7ce068d178d8cdbc",
+      "digest": "sha256:e0fd55199b67b4cb71b77549eb0a3835aa7b7ed94e8a42cd7ce068d178d8cdbc",
+      "case": "ColExpr.Cast",
+      "description": "A `cast` to the column type `int`, by its tag."
+    },
+    {
+      "id": "token/cast-type-string",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/cast-type-string.json",
+      "sha256": "9cdf4a6a6f87c51fdb30620a25efd2ca2dbcbb23db4c549153f639845a5e1982",
+      "digest": "sha256:9cdf4a6a6f87c51fdb30620a25efd2ca2dbcbb23db4c549153f639845a5e1982",
+      "case": "ColExpr.Cast",
+      "description": "A `cast` to the column type `string`, by its tag."
+    },
+    {
+      "id": "token/cast-type-timestamp",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/cast-type-timestamp.json",
+      "sha256": "7b6de2c975917a3d210e08425b79beb934e4f39675ede5726279994845d73c19",
+      "digest": "sha256:7b6de2c975917a3d210e08425b79beb934e4f39675ede5726279994845d73c19",
+      "case": "ColExpr.Cast",
+      "description": "A `cast` to the column type `timestamp`, by its tag."
+    },
+    {
+      "id": "token/cast-type-timestamp-ms",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/cast-type-timestamp-ms.json",
+      "sha256": "a1ae1a540ca788082caab4f1e5cb1eca99ef0a33a72b82433939379f7ee146f1",
+      "digest": "sha256:a1ae1a540ca788082caab4f1e5cb1eca99ef0a33a72b82433939379f7ee146f1",
+      "case": "ColExpr.Cast",
+      "description": "A `cast` to the column type `timestamp_ms`, by its tag."
+    },
+    {
+      "id": "token/cast-type-timestamp-ns",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/cast-type-timestamp-ns.json",
+      "sha256": "f39c97f8724b130163ba5481f6ab40e6e210486cae3e27a808d14ec0fdca190e",
+      "digest": "sha256:f39c97f8724b130163ba5481f6ab40e6e210486cae3e27a808d14ec0fdca190e",
+      "case": "ColExpr.Cast",
+      "description": "A `cast` to the column type `timestamp_ns`, by its tag."
+    },
+    {
+      "id": "token/cast-type-timestamp-us",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/cast-type-timestamp-us.json",
+      "sha256": "8024fa5ef20595f91c808a7d9d97952d3bd997aceb502cf4bd5a7a5402a8e672",
+      "digest": "sha256:8024fa5ef20595f91c808a7d9d97952d3bd997aceb502cf4bd5a7a5402a8e672",
+      "case": "ColExpr.Cast",
+      "description": "A `cast` to the column type `timestamp_us`, by its tag."
+    },
+    {
+      "id": "token/fitfamily-binomial",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitfamily-binomial.json",
+      "sha256": "7359811cbd698645c4aaf26c230201328c798c91b8fc4eb2ea6de11a8b77b1b1",
+      "digest": "sha256:7359811cbd698645c4aaf26c230201328c798c91b8fc4eb2ea6de11a8b77b1b1",
+      "case": "FitFamily.Binomial",
+      "description": "The wire-surface harness's document for FitFamily.Binomial: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitfamily-gamma",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitfamily-gamma.json",
+      "sha256": "817177df69a0304654792efed28f2e840e8fe3634f07c8f367170b994c5433bd",
+      "digest": "sha256:817177df69a0304654792efed28f2e840e8fe3634f07c8f367170b994c5433bd",
+      "case": "FitFamily.Gamma",
+      "description": "The wire-surface harness's document for FitFamily.Gamma: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitfamily-gaussian",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitfamily-gaussian.json",
+      "sha256": "07dd697c5668c29ce7e1cf55a8d6c8640f0f33daf8c6a6f291cfcc0dcf6862fb",
+      "digest": "sha256:07dd697c5668c29ce7e1cf55a8d6c8640f0f33daf8c6a6f291cfcc0dcf6862fb",
+      "case": "FitFamily.Gaussian",
+      "description": "The wire-surface harness's document for FitFamily.Gaussian: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitfamily-inverse-gaussian",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitfamily-inverse-gaussian.json",
+      "sha256": "4caeec78c74def9e0399308f893c928963675a416bd1298d2bd7a07203721e11",
+      "digest": "sha256:4caeec78c74def9e0399308f893c928963675a416bd1298d2bd7a07203721e11",
+      "case": "FitFamily.InverseGaussian",
+      "description": "The wire-surface harness's document for FitFamily.InverseGaussian: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitfamily-negative-binomial",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitfamily-negative-binomial.json",
+      "sha256": "6c714a7cc7e2f35d582d33b9655c44267ec45f28aafc4677712fa2f9c11a070a",
+      "digest": "sha256:6c714a7cc7e2f35d582d33b9655c44267ec45f28aafc4677712fa2f9c11a070a",
+      "case": "FitFamily.NegativeBinomial",
+      "description": "The wire-surface harness's document for FitFamily.NegativeBinomial: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitfamily-poisson",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitfamily-poisson.json",
+      "sha256": "57158f3aa7b4b2b28ed89a959f05790425682d66ac0a9def9697fe07f28b23af",
+      "digest": "sha256:57158f3aa7b4b2b28ed89a959f05790425682d66ac0a9def9697fe07f28b23af",
+      "case": "FitFamily.Poisson",
+      "description": "The wire-surface harness's document for FitFamily.Poisson: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitfamily-quasi-binomial",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitfamily-quasi-binomial.json",
+      "sha256": "7442d7143dd8625c049b8a8793685701a72241605a9e33fdaebe10b90cc050b5",
+      "digest": "sha256:7442d7143dd8625c049b8a8793685701a72241605a9e33fdaebe10b90cc050b5",
+      "case": "FitFamily.QuasiBinomial",
+      "description": "The wire-surface harness's document for FitFamily.QuasiBinomial: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitfamily-quasi-poisson",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitfamily-quasi-poisson.json",
+      "sha256": "74ee106bf2906cd58ed8161d30ae819bd01023c54b14e5a63bcf5eea8b8c740f",
+      "digest": "sha256:74ee106bf2906cd58ed8161d30ae819bd01023c54b14e5a63bcf5eea8b8c740f",
+      "case": "FitFamily.QuasiPoisson",
+      "description": "The wire-surface harness's document for FitFamily.QuasiPoisson: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitfamily-tweedie",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitfamily-tweedie.json",
+      "sha256": "9150d3b1ff2aa59d59afd7418e95b29dd79d2b46a60235f964fcb4c24e495b3d",
+      "digest": "sha256:9150d3b1ff2aa59d59afd7418e95b29dd79d2b46a60235f964fcb4c24e495b3d",
+      "case": "FitFamily.Tweedie",
+      "description": "The wire-surface harness's document for FitFamily.Tweedie: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitlink-cloglog",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitlink-cloglog.json",
+      "sha256": "a619410532d6712f39e00a4d500ccd05dedac59a3686e2964495ddffa10e5aa7",
+      "digest": "sha256:a619410532d6712f39e00a4d500ccd05dedac59a3686e2964495ddffa10e5aa7",
+      "case": "FitLink.Cloglog",
+      "description": "The wire-surface harness's document for FitLink.Cloglog: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitlink-identity",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitlink-identity.json",
+      "sha256": "07dd697c5668c29ce7e1cf55a8d6c8640f0f33daf8c6a6f291cfcc0dcf6862fb",
+      "digest": "sha256:07dd697c5668c29ce7e1cf55a8d6c8640f0f33daf8c6a6f291cfcc0dcf6862fb",
+      "case": "FitLink.Identity",
+      "description": "The wire-surface harness's document for FitLink.Identity: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitlink-inverse",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitlink-inverse.json",
+      "sha256": "cf12250ed653cc868bf79d1007989a9f1ab8a360316c47ac3c4a2b6fd0773ada",
+      "digest": "sha256:cf12250ed653cc868bf79d1007989a9f1ab8a360316c47ac3c4a2b6fd0773ada",
+      "case": "FitLink.Inverse",
+      "description": "The wire-surface harness's document for FitLink.Inverse: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitlink-inverse-square",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitlink-inverse-square.json",
+      "sha256": "739d9770730c0535b9686d1589c2c7a391a63946f8e42c7a51cce0f1be398a7a",
+      "digest": "sha256:739d9770730c0535b9686d1589c2c7a391a63946f8e42c7a51cce0f1be398a7a",
+      "case": "FitLink.InverseSquare",
+      "description": "The wire-surface harness's document for FitLink.InverseSquare: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitlink-log",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitlink-log.json",
+      "sha256": "e1b78b11a1d02b317106314a88b32584023040b1cdfdc092364845b5c1b13874",
+      "digest": "sha256:e1b78b11a1d02b317106314a88b32584023040b1cdfdc092364845b5c1b13874",
+      "case": "FitLink.Log",
+      "description": "The wire-surface harness's document for FitLink.Log: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitlink-logit",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitlink-logit.json",
+      "sha256": "7359811cbd698645c4aaf26c230201328c798c91b8fc4eb2ea6de11a8b77b1b1",
+      "digest": "sha256:7359811cbd698645c4aaf26c230201328c798c91b8fc4eb2ea6de11a8b77b1b1",
+      "case": "FitLink.Logit",
+      "description": "The wire-surface harness's document for FitLink.Logit: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitlink-probit",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitlink-probit.json",
+      "sha256": "6a8ea8119b516b0ee6352670223d9e4d192ad438cab0f73034c10db425d66acd",
+      "digest": "sha256:6a8ea8119b516b0ee6352670223d9e4d192ad438cab0f73034c10db425d66acd",
+      "case": "FitLink.Probit",
+      "description": "The wire-surface harness's document for FitLink.Probit: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitlink-sqrt",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitlink-sqrt.json",
+      "sha256": "128b72f00eb68b915fa1504c4ce1292bbe4c3f42116e5c1472f8c32624044ef8",
+      "digest": "sha256:128b72f00eb68b915fa1504c4ce1292bbe4c3f42116e5c1472f8c32624044ef8",
+      "case": "FitLink.Sqrt",
+      "description": "The wire-surface harness's document for FitLink.Sqrt: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitoutput-coefficients",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitoutput-coefficients.json",
+      "sha256": "07dd697c5668c29ce7e1cf55a8d6c8640f0f33daf8c6a6f291cfcc0dcf6862fb",
+      "digest": "sha256:07dd697c5668c29ce7e1cf55a8d6c8640f0f33daf8c6a6f291cfcc0dcf6862fb",
+      "case": "FitOutput.Coefficients",
+      "description": "The wire-surface harness's document for FitOutput.Coefficients: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitoutput-fitted",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitoutput-fitted.json",
+      "sha256": "2683e5d245a135ee2024da4a695a27150f2c5bdd4587b70f062fb5efb8847a7c",
+      "digest": "sha256:2683e5d245a135ee2024da4a695a27150f2c5bdd4587b70f062fb5efb8847a7c",
+      "case": "FitOutput.Fitted",
+      "description": "The wire-surface harness's document for FitOutput.Fitted: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitoutput-residuals",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitoutput-residuals.json",
+      "sha256": "b79fd8b64fb786a9a36997e82c1cfddb01010df336724fcaf5711b2d91bf31e2",
+      "digest": "sha256:b79fd8b64fb786a9a36997e82c1cfddb01010df336724fcaf5711b2d91bf31e2",
+      "case": "FitOutput.Residuals",
+      "description": "The wire-surface harness's document for FitOutput.Residuals: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitoutput-summary",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitoutput-summary.json",
+      "sha256": "b8706b2b8b94c6e89ea3699edec54031f41521141455cb0467574fd971bcf56b",
+      "digest": "sha256:b8706b2b8b94c6e89ea3699edec54031f41521141455cb0467574fd971bcf56b",
+      "case": "FitOutput.Summary",
+      "description": "The wire-surface harness's document for FitOutput.Summary: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitstderrors-classical",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitstderrors-classical.json",
+      "sha256": "07dd697c5668c29ce7e1cf55a8d6c8640f0f33daf8c6a6f291cfcc0dcf6862fb",
+      "digest": "sha256:07dd697c5668c29ce7e1cf55a8d6c8640f0f33daf8c6a6f291cfcc0dcf6862fb",
+      "case": "FitStdErrors.Classical",
+      "description": "The wire-surface harness's document for FitStdErrors.Classical: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitstderrors-hc0",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitstderrors-hc0.json",
+      "sha256": "1831da744faa6d3b3306406d68322af0afa18b21a3f0ff16d8ad76b0b069e2f1",
+      "digest": "sha256:1831da744faa6d3b3306406d68322af0afa18b21a3f0ff16d8ad76b0b069e2f1",
+      "case": "FitStdErrors.HC0",
+      "description": "The wire-surface harness's document for FitStdErrors.HC0: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitstderrors-hc1",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitstderrors-hc1.json",
+      "sha256": "d624f0a3fe4f495ac03183d52bc9dc462164fe1ccfe6cdc87ec25934c1371b58",
+      "digest": "sha256:d624f0a3fe4f495ac03183d52bc9dc462164fe1ccfe6cdc87ec25934c1371b58",
+      "case": "FitStdErrors.HC1",
+      "description": "The wire-surface harness's document for FitStdErrors.HC1: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitstderrors-hc2",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitstderrors-hc2.json",
+      "sha256": "f55df08bdc50029517d7de89b249eeea5850205a46f8f8b6742e8d73036be123",
+      "digest": "sha256:f55df08bdc50029517d7de89b249eeea5850205a46f8f8b6742e8d73036be123",
+      "case": "FitStdErrors.HC2",
+      "description": "The wire-surface harness's document for FitStdErrors.HC2: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/fitstderrors-hc3",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/fitstderrors-hc3.json",
+      "sha256": "1f5ac9c473bd5276d9692916c1d55f42184e71f934ace5f5722a84845f79d0bb",
+      "digest": "sha256:1f5ac9c473bd5276d9692916c1d55f42184e71f934ace5f5722a84845f79d0bb",
+      "case": "FitStdErrors.HC3",
+      "description": "The wire-surface harness's document for FitStdErrors.HC3: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/interpkind-linear",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/interpkind-linear.json",
+      "sha256": "13bd572b6cea3739932671247a880636d2022b67c87adb5c717850ebfd2ed168",
+      "digest": "sha256:13bd572b6cea3739932671247a880636d2022b67c87adb5c717850ebfd2ed168",
+      "case": "InterpKind.Linear",
+      "description": "The wire-surface harness's document for InterpKind.Linear: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/interpkind-monotone-cubic",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/interpkind-monotone-cubic.json",
+      "sha256": "e700d0638ec70a45aabf67cdd8e6d9b429366da874064b34b79598b90d2d3a45",
+      "digest": "sha256:e700d0638ec70a45aabf67cdd8e6d9b429366da874064b34b79598b90d2d3a45",
+      "case": "InterpKind.MonotoneCubic",
+      "description": "The wire-surface harness's document for InterpKind.MonotoneCubic: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/interpkind-step",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/interpkind-step.json",
+      "sha256": "ce3a0e17e53d82088a1e5ef9965faada0fbc7206088fcef65b61db4f032f8d36",
+      "digest": "sha256:ce3a0e17e53d82088a1e5ef9965faada0fbc7206088fcef65b61db4f032f8d36",
+      "case": "InterpKind.Step",
+      "description": "The wire-surface harness's document for InterpKind.Step: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/interpoutside-clamp",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/interpoutside-clamp.json",
+      "sha256": "13bd572b6cea3739932671247a880636d2022b67c87adb5c717850ebfd2ed168",
+      "digest": "sha256:13bd572b6cea3739932671247a880636d2022b67c87adb5c717850ebfd2ed168",
+      "case": "InterpOutside.Clamp",
+      "description": "The wire-surface harness's document for InterpOutside.Clamp: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/interpoutside-null",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/interpoutside-null.json",
+      "sha256": "1348b9f8eef6b66e2effee455ab612e2c5d4bfdc47284cb292bf9482567e7cc6",
+      "digest": "sha256:1348b9f8eef6b66e2effee455ab612e2c5d4bfdc47284cb292bf9482567e7cc6",
+      "case": "InterpOutside.Null",
+      "description": "The wire-surface harness's document for InterpOutside.Null: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/intervalkind-confidence",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/intervalkind-confidence.json",
+      "sha256": "86dce60ea876dda284920df5995a045ca1ae7f79f24f896a70ec27625b35328b",
+      "digest": "sha256:86dce60ea876dda284920df5995a045ca1ae7f79f24f896a70ec27625b35328b",
+      "case": "IntervalKind.Confidence",
+      "description": "The wire-surface harness's document for IntervalKind.Confidence: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/intervalkind-prediction",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/intervalkind-prediction.json",
+      "sha256": "8c0f2f1b5144a61b60b839036129b97042f535e61b4ab40fb4ca0cd9ddb7bce5",
+      "digest": "sha256:8c0f2f1b5144a61b60b839036129b97042f535e61b4ab40fb4ca0cd9ddb7bce5",
+      "case": "IntervalKind.Prediction",
+      "description": "The wire-surface harness's document for IntervalKind.Prediction: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/joinkind-anti",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/joinkind-anti.json",
+      "sha256": "a22a7708f202f34377354bda5f461080d05fcf4005046111e22c6955a0c719ea",
+      "digest": "sha256:a22a7708f202f34377354bda5f461080d05fcf4005046111e22c6955a0c719ea",
+      "case": "JoinKind.Anti",
+      "description": "The wire-surface harness's document for JoinKind.Anti: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/joinkind-inner",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/joinkind-inner.json",
+      "sha256": "3e0f57f3668b421bc2482114b82f4833df56254522aa4aa5bc4ba5124f0ee0c3",
+      "digest": "sha256:3e0f57f3668b421bc2482114b82f4833df56254522aa4aa5bc4ba5124f0ee0c3",
+      "case": "JoinKind.Inner",
+      "description": "The wire-surface harness's document for JoinKind.Inner: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/joinkind-left",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/joinkind-left.json",
+      "sha256": "4a3238fb542df5f7e0309452759669ada5a158ed1dac0456407dc01d85e2c70a",
+      "digest": "sha256:4a3238fb542df5f7e0309452759669ada5a158ed1dac0456407dc01d85e2c70a",
+      "case": "JoinKind.Left",
+      "description": "The wire-surface harness's document for JoinKind.Left: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/joinkind-outer",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/joinkind-outer.json",
+      "sha256": "d05041551f06b28bf5a5d483c614a751941cdfaebffee5c144ad90a95390cc7d",
+      "digest": "sha256:d05041551f06b28bf5a5d483c614a751941cdfaebffee5c144ad90a95390cc7d",
+      "case": "JoinKind.Outer",
+      "description": "The wire-surface harness's document for JoinKind.Outer: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/joinkind-right",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/joinkind-right.json",
+      "sha256": "9b19f4eb77e4da40260d476ecdaf698f803d83a0a70ddc4a6268cc72f1ffc43f",
+      "digest": "sha256:9b19f4eb77e4da40260d476ecdaf698f803d83a0a70ddc4a6268cc72f1ffc43f",
+      "case": "JoinKind.Right",
+      "description": "The wire-surface harness's document for JoinKind.Right: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/joinkind-semi",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/joinkind-semi.json",
+      "sha256": "5772b372d1deeb720c81172238cdfa9d6aef52a83261e2e11f7c26b656b16970",
+      "digest": "sha256:5772b372d1deeb720c81172238cdfa9d6aef52a83261e2e11f7c26b656b16970",
+      "case": "JoinKind.Semi",
+      "description": "The wire-surface harness's document for JoinKind.Semi: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/kmeansoutput-assignments",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/kmeansoutput-assignments.json",
+      "sha256": "8092ff7e6cc85e6c466911ddece97a80068c10bcad57c39039011d4ca82b07e1",
+      "digest": "sha256:8092ff7e6cc85e6c466911ddece97a80068c10bcad57c39039011d4ca82b07e1",
+      "case": "KMeansOutput.Assignments",
+      "description": "The wire-surface harness's document for KMeansOutput.Assignments: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/kmeansoutput-centres",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/kmeansoutput-centres.json",
+      "sha256": "fa73520ecc9ab802c723e3ad6f07325b435d6bce5e6b3ad2ecdcc972072fb2ab",
+      "digest": "sha256:fa73520ecc9ab802c723e3ad6f07325b435d6bce5e6b3ad2ecdcc972072fb2ab",
+      "case": "KMeansOutput.Centres",
+      "description": "The wire-surface harness's document for KMeansOutput.Centres: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/kmeansoutput-summary",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/kmeansoutput-summary.json",
+      "sha256": "0728bbf7c7f584ab896bc64dacf00d39dbc309c49d21b2b40ea736ec437e9c07",
+      "digest": "sha256:0728bbf7c7f584ab896bc64dacf00d39dbc309c49d21b2b40ea736ec437e9c07",
+      "case": "KMeansOutput.Summary",
+      "description": "The wire-surface harness's document for KMeansOutput.Summary: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/nowgrain-date",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/nowgrain-date.json",
+      "sha256": "827924443c9d3223699b1ebce59f96709f5f45e42895864032fe59601f70e417",
+      "digest": "sha256:827924443c9d3223699b1ebce59f96709f5f45e42895864032fe59601f70e417",
+      "case": "NowGrain.Date",
+      "description": "The wire-surface harness's document for NowGrain.Date: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/nowgrain-timestamp",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/nowgrain-timestamp.json",
+      "sha256": "5e519fb22f2b966a4faacc102c9a4b26085018d546819626f934453531d5763a",
+      "digest": "sha256:5e519fb22f2b966a4faacc102c9a4b26085018d546819626f934453531d5763a",
+      "case": "NowGrain.Timestamp",
+      "description": "The wire-surface harness's document for NowGrain.Timestamp: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/predictmodel-coefficients",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/predictmodel-coefficients.json",
+      "sha256": "5940509b0e18bd5a63fd83128b126c388407d9ada932b8d7b99da3e650b3806e",
+      "digest": "sha256:5940509b0e18bd5a63fd83128b126c388407d9ada932b8d7b99da3e650b3806e",
+      "case": "PredictModel.Coefficients",
+      "description": "The wire-surface harness's document for PredictModel.Coefficients: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/predictmodel-training",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/predictmodel-training.json",
+      "sha256": "86dce60ea876dda284920df5995a045ca1ae7f79f24f896a70ec27625b35328b",
+      "digest": "sha256:86dce60ea876dda284920df5995a045ca1ae7f79f24f896a70ec27625b35328b",
+      "case": "PredictModel.Training",
+      "description": "The wire-surface harness's document for PredictModel.Training: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/predictscale-link",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/predictscale-link.json",
+      "sha256": "86dce60ea876dda284920df5995a045ca1ae7f79f24f896a70ec27625b35328b",
+      "digest": "sha256:86dce60ea876dda284920df5995a045ca1ae7f79f24f896a70ec27625b35328b",
+      "case": "PredictScale.Link",
+      "description": "The wire-surface harness's document for PredictScale.Link: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/predictscale-response",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/predictscale-response.json",
+      "sha256": "7354031c92bb9f24d6314d341557cb7072da5a19f2aeee0b6e91683529c55878",
+      "digest": "sha256:7354031c92bb9f24d6314d341557cb7072da5a19f2aeee0b6e91683529c55878",
+      "case": "PredictScale.Response",
+      "description": "The wire-surface harness's document for PredictScale.Response: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/reject-aggregate",
+      "family": "token",
+      "kind": "reject",
+      "file": "token/reject-aggregate.json",
+      "sha256": "b46337caf0151dfa21aaf8e196a3d9947fc44405683e020850c0125412aa1622",
+      "reject": "unknown-tag",
+      "detect": "schema",
+      "description": "An aggregate whose `fn` is not a registered aggregate function."
+    },
+    {
+      "id": "token/reject-join-kind",
+      "family": "token",
+      "kind": "reject",
+      "file": "token/reject-join-kind.json",
+      "sha256": "c81b508beebd12911886ed9f483231c648cc2178e5167bc11ab5d115b32541b4",
+      "reject": "unknown-tag",
+      "detect": "schema",
+      "description": "A join whose `how` is not a registered join kind."
+    },
+    {
+      "id": "token/roundingmode-ceiling",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/roundingmode-ceiling.json",
+      "sha256": "b4fb188f5aba463a8eab68affd50a98d68751e47ea337b46737ac6242cc517b5",
+      "digest": "sha256:b4fb188f5aba463a8eab68affd50a98d68751e47ea337b46737ac6242cc517b5",
+      "case": "RoundingMode.Ceiling",
+      "description": "The wire-surface harness's document for RoundingMode.Ceiling: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/roundingmode-down",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/roundingmode-down.json",
+      "sha256": "c4bf13346869331465bdf1ead326e84ea4e0b50de95fd3e102d921c178800e78",
+      "digest": "sha256:c4bf13346869331465bdf1ead326e84ea4e0b50de95fd3e102d921c178800e78",
+      "case": "RoundingMode.Down",
+      "description": "The wire-surface harness's document for RoundingMode.Down: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/roundingmode-floor",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/roundingmode-floor.json",
+      "sha256": "33e6b3966bf11af700685099bee759c0348ef60a4f489e26c1f8c514e62ea614",
+      "digest": "sha256:33e6b3966bf11af700685099bee759c0348ef60a4f489e26c1f8c514e62ea614",
+      "case": "RoundingMode.Floor",
+      "description": "The wire-surface harness's document for RoundingMode.Floor: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/roundingmode-half-down",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/roundingmode-half-down.json",
+      "sha256": "4ffb19532b6c9a8cd40e1e7113847fcc48e9812dfe81fc4f167b1e1496b748d9",
+      "digest": "sha256:4ffb19532b6c9a8cd40e1e7113847fcc48e9812dfe81fc4f167b1e1496b748d9",
+      "case": "RoundingMode.HalfDown",
+      "description": "The wire-surface harness's document for RoundingMode.HalfDown: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/roundingmode-half-even",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/roundingmode-half-even.json",
+      "sha256": "3b3d33b8a98f41efc7c5f363f074b5ff6d1361b8d686807e45a7ccf6dee60267",
+      "digest": "sha256:3b3d33b8a98f41efc7c5f363f074b5ff6d1361b8d686807e45a7ccf6dee60267",
+      "case": "RoundingMode.HalfEven",
+      "description": "The wire-surface harness's document for RoundingMode.HalfEven: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/roundingmode-half-up",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/roundingmode-half-up.json",
+      "sha256": "4844f292f78fd2fb692a59194e274dd63c8fe999dc8b04bb16f7c295f7fe69ba",
+      "digest": "sha256:4844f292f78fd2fb692a59194e274dd63c8fe999dc8b04bb16f7c295f7fe69ba",
+      "case": "RoundingMode.HalfUp",
+      "description": "The wire-surface harness's document for RoundingMode.HalfUp: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/roundingmode-up",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/roundingmode-up.json",
+      "sha256": "ec983feea90e6e295fadb82f5f2e2fbb4a8b81ca50eedb1c7079c9fecd516ddb",
+      "digest": "sha256:ec983feea90e6e295fadb82f5f2e2fbb4a8b81ca50eedb1c7079c9fecd516ddb",
+      "case": "RoundingMode.Up",
+      "description": "The wire-surface harness's document for RoundingMode.Up: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-abs",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-abs.json",
+      "sha256": "fa769ad8a2e781d7551401bbc93581976e3521b8af2878d39ea865be16fbbc6a",
+      "digest": "sha256:fa769ad8a2e781d7551401bbc93581976e3521b8af2878d39ea865be16fbbc6a",
+      "case": "ScalarFn.Abs",
+      "description": "The wire-surface harness's document for ScalarFn.Abs: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-ceil",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-ceil.json",
+      "sha256": "071cff715cef867ffe4a395825f1843cbce61bd741bad7fb9d53b8b68a1a67fc",
+      "digest": "sha256:071cff715cef867ffe4a395825f1843cbce61bd741bad7fb9d53b8b68a1a67fc",
+      "case": "ScalarFn.Ceil",
+      "description": "The wire-surface harness's document for ScalarFn.Ceil: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-concat",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-concat.json",
+      "sha256": "e42bc2d7106ccb8bb9c5cb1ecee41877860d4d2e7dbfc1cc37027f0f41c94e15",
+      "digest": "sha256:e42bc2d7106ccb8bb9c5cb1ecee41877860d4d2e7dbfc1cc37027f0f41c94e15",
+      "case": "ScalarFn.Concat",
+      "description": "The wire-surface harness's document for ScalarFn.Concat: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-date-diff-days",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-date-diff-days.json",
+      "sha256": "e93ac93f7996f35ea71929db53a319bcf4754cf5d787ac7ac8dfd7a826bc2764",
+      "digest": "sha256:e93ac93f7996f35ea71929db53a319bcf4754cf5d787ac7ac8dfd7a826bc2764",
+      "case": "ScalarFn.DateDiffDays",
+      "description": "The wire-surface harness's document for ScalarFn.DateDiffDays: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-date-part",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-date-part.json",
+      "sha256": "eebfed14da065330a7814f53840b52f56ffebc6e3084391592835e09212d695f",
+      "digest": "sha256:eebfed14da065330a7814f53840b52f56ffebc6e3084391592835e09212d695f",
+      "case": "ScalarFn.DatePart",
+      "description": "The wire-surface harness's document for ScalarFn.DatePart: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-exp",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-exp.json",
+      "sha256": "d36be0f5b98e5b5be64d133a34ee28b943bf23da6975d0cf04b192f1ed267e28",
+      "digest": "sha256:d36be0f5b98e5b5be64d133a34ee28b943bf23da6975d0cf04b192f1ed267e28",
+      "case": "ScalarFn.Exp",
+      "description": "The wire-surface harness's document for ScalarFn.Exp: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-floor",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-floor.json",
+      "sha256": "d6519053f04e9d9c45c5e7494868ff5da889376c73f3d54f8a38ac9ef5bbe18f",
+      "digest": "sha256:d6519053f04e9d9c45c5e7494868ff5da889376c73f3d54f8a38ac9ef5bbe18f",
+      "case": "ScalarFn.Floor",
+      "description": "The wire-surface harness's document for ScalarFn.Floor: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-greatest",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-greatest.json",
+      "sha256": "b50a5b49ef90310fdb17e23d5562e7704ee0ad2d9deafb1389b0c3dee3d23c25",
+      "digest": "sha256:b50a5b49ef90310fdb17e23d5562e7704ee0ad2d9deafb1389b0c3dee3d23c25",
+      "case": "ScalarFn.Greatest",
+      "description": "The wire-surface harness's document for ScalarFn.Greatest: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-index-of",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-index-of.json",
+      "sha256": "3b2cfb9fe702be713a04a2d9e9450fe1ccf985acdf4cf3fc54bcb0813f169e80",
+      "digest": "sha256:3b2cfb9fe702be713a04a2d9e9450fe1ccf985acdf4cf3fc54bcb0813f169e80",
+      "case": "ScalarFn.IndexOf",
+      "description": "The wire-surface harness's document for ScalarFn.IndexOf: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-least",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-least.json",
+      "sha256": "ea4fde0f9a90219973b20dc1e7146e33abbc2015872714f005f9c3ca388bf9ac",
+      "digest": "sha256:ea4fde0f9a90219973b20dc1e7146e33abbc2015872714f005f9c3ca388bf9ac",
+      "case": "ScalarFn.Least",
+      "description": "The wire-surface harness's document for ScalarFn.Least: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-length",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-length.json",
+      "sha256": "75725501571d19618db3dd297275e76aa886add78cbada1acf42c576da4d9d99",
+      "digest": "sha256:75725501571d19618db3dd297275e76aa886add78cbada1acf42c576da4d9d99",
+      "case": "ScalarFn.Length",
+      "description": "The wire-surface harness's document for ScalarFn.Length: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-ln",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-ln.json",
+      "sha256": "31c7a7f7c516610405190ebb538d2fe0c3f85450ec7950316192a4348d1c3ab3",
+      "digest": "sha256:31c7a7f7c516610405190ebb538d2fe0c3f85450ec7950316192a4348d1c3ab3",
+      "case": "ScalarFn.Ln",
+      "description": "The wire-surface harness's document for ScalarFn.Ln: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-log10",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-log10.json",
+      "sha256": "dce98b839caceeffad97239c060bc4c3e098f0fcace098a61e3b7658516168a8",
+      "digest": "sha256:dce98b839caceeffad97239c060bc4c3e098f0fcace098a61e3b7658516168a8",
+      "case": "ScalarFn.Log10",
+      "description": "The wire-surface harness's document for ScalarFn.Log10: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-lower",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-lower.json",
+      "sha256": "aa47917425b932a79878cf3c4b05fab0018eb67d361e8c36bbb722b4f28cbe6c",
+      "digest": "sha256:aa47917425b932a79878cf3c4b05fab0018eb67d361e8c36bbb722b4f28cbe6c",
+      "case": "ScalarFn.Lower",
+      "description": "The wire-surface harness's document for ScalarFn.Lower: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-pow",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-pow.json",
+      "sha256": "4e368b0d797705421c319dd6482f37c32219522e3dc808a5f6137cffa1276dea",
+      "digest": "sha256:4e368b0d797705421c319dd6482f37c32219522e3dc808a5f6137cffa1276dea",
+      "case": "ScalarFn.Pow",
+      "description": "The wire-surface harness's document for ScalarFn.Pow: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-replace",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-replace.json",
+      "sha256": "ff9fd71be3279263999e455fc7b7bcb2b84d83801a78fb7c3d8d23956123fe1b",
+      "digest": "sha256:ff9fd71be3279263999e455fc7b7bcb2b84d83801a78fb7c3d8d23956123fe1b",
+      "case": "ScalarFn.Replace",
+      "description": "The wire-surface harness's document for ScalarFn.Replace: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-round",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-round.json",
+      "sha256": "e441990e720adbb5f3ec09574ffaaa88175cc4b7b3555f5964cfe7df62ab474a",
+      "digest": "sha256:e441990e720adbb5f3ec09574ffaaa88175cc4b7b3555f5964cfe7df62ab474a",
+      "case": "ScalarFn.Round",
+      "description": "The wire-surface harness's document for ScalarFn.Round: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-sqrt",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-sqrt.json",
+      "sha256": "3db5984976960053039811eadfdc812e592165738bccc93be596cd3098ef830e",
+      "digest": "sha256:3db5984976960053039811eadfdc812e592165738bccc93be596cd3098ef830e",
+      "case": "ScalarFn.Sqrt",
+      "description": "The wire-surface harness's document for ScalarFn.Sqrt: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-substr",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-substr.json",
+      "sha256": "d1bb11b3835a641f873c58db835a31da28546f72115921582433c0b0d9cc27bc",
+      "digest": "sha256:d1bb11b3835a641f873c58db835a31da28546f72115921582433c0b0d9cc27bc",
+      "case": "ScalarFn.Substr",
+      "description": "The wire-surface harness's document for ScalarFn.Substr: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-trim",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-trim.json",
+      "sha256": "6b09a103adba6f73d10b678b1331a734308e269c0d4f636ac7b8532349be12f6",
+      "digest": "sha256:6b09a103adba6f73d10b678b1331a734308e269c0d4f636ac7b8532349be12f6",
+      "case": "ScalarFn.Trim",
+      "description": "The wire-surface harness's document for ScalarFn.Trim: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/scalarfn-upper",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/scalarfn-upper.json",
+      "sha256": "22a07950b6711676cd443f413ad840bfdb4361d5f01721ca0e71358607f84c39",
+      "digest": "sha256:22a07950b6711676cd443f413ad840bfdb4361d5f01721ca0e71358607f84c39",
+      "case": "ScalarFn.Upper",
+      "description": "The wire-surface harness's document for ScalarFn.Upper: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/sortdir-asc",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/sortdir-asc.json",
+      "sha256": "9c797ca5218564ebedcb71032ecae025205204fb9ba8be22f6d9376004e60530",
+      "digest": "sha256:9c797ca5218564ebedcb71032ecae025205204fb9ba8be22f6d9376004e60530",
+      "case": "SortDir.Asc",
+      "description": "The wire-surface harness's document for SortDir.Asc: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/sortdir-desc",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/sortdir-desc.json",
+      "sha256": "a2baf8ac2162832509ca07a2870d80aef90a575d6f450f667561ace1152ff6df",
+      "digest": "sha256:a2baf8ac2162832509ca07a2870d80aef90a575d6f450f667561ace1152ff6df",
+      "case": "SortDir.Desc",
+      "description": "The wire-surface harness's document for SortDir.Desc: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/windowfn-competition-rank",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/windowfn-competition-rank.json",
+      "sha256": "871c971939da61c83f7012fab653ab0202d3fbf059233d598995b2117f573484",
+      "digest": "sha256:871c971939da61c83f7012fab653ab0202d3fbf059233d598995b2117f573484",
+      "case": "WindowFn.CompetitionRank",
+      "description": "The wire-surface harness's document for WindowFn.CompetitionRank: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/windowfn-cumul-max",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/windowfn-cumul-max.json",
+      "sha256": "b9a63e9592cafc001a7ec9f3b8a439f49d6cfce12faad8aa6be89330ffcc32aa",
+      "digest": "sha256:b9a63e9592cafc001a7ec9f3b8a439f49d6cfce12faad8aa6be89330ffcc32aa",
+      "case": "WindowFn.CumulMax",
+      "description": "The wire-surface harness's document for WindowFn.CumulMax: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/windowfn-cumul-min",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/windowfn-cumul-min.json",
+      "sha256": "91b59c65adc8f3638c7e44808a597bb845f94d8e0f59e46a6d119c17a82796d3",
+      "digest": "sha256:91b59c65adc8f3638c7e44808a597bb845f94d8e0f59e46a6d119c17a82796d3",
+      "case": "WindowFn.CumulMin",
+      "description": "The wire-surface harness's document for WindowFn.CumulMin: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/windowfn-cumul-sum",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/windowfn-cumul-sum.json",
+      "sha256": "452d6f38d9ebcfb115a6e193d15b42a2958bf703e2f83e44c770d6158236a936",
+      "digest": "sha256:452d6f38d9ebcfb115a6e193d15b42a2958bf703e2f83e44c770d6158236a936",
+      "case": "WindowFn.CumulSum",
+      "description": "The wire-surface harness's document for WindowFn.CumulSum: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/windowfn-dense-rank",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/windowfn-dense-rank.json",
+      "sha256": "5781e64a4586da9d939325b784a1b07e7e1c0b1b124de12c6d264f5a4b6a7cce",
+      "digest": "sha256:5781e64a4586da9d939325b784a1b07e7e1c0b1b124de12c6d264f5a4b6a7cce",
+      "case": "WindowFn.DenseRank",
+      "description": "The wire-surface harness's document for WindowFn.DenseRank: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/windowfn-lag",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/windowfn-lag.json",
+      "sha256": "7b3f37486c2f105f0d7078ef7d71a213283fbc7308dab3e8d7d5b7436ab65adc",
+      "digest": "sha256:7b3f37486c2f105f0d7078ef7d71a213283fbc7308dab3e8d7d5b7436ab65adc",
+      "case": "WindowFn.Lag",
+      "description": "The wire-surface harness's document for WindowFn.Lag: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/windowfn-lead",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/windowfn-lead.json",
+      "sha256": "dd515f999d975481ad3f4518c78d69fbb01f6f5c6b976b949ba769e5f1f2f69e",
+      "digest": "sha256:dd515f999d975481ad3f4518c78d69fbb01f6f5c6b976b949ba769e5f1f2f69e",
+      "case": "WindowFn.Lead",
+      "description": "The wire-surface harness's document for WindowFn.Lead: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/windowfn-ntile",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/windowfn-ntile.json",
+      "sha256": "2833792f6502512060273640bad5c8a77141c074ed7193973a46fba1ed429729",
+      "digest": "sha256:2833792f6502512060273640bad5c8a77141c074ed7193973a46fba1ed429729",
+      "case": "WindowFn.NTile",
+      "description": "The wire-surface harness's document for WindowFn.NTile: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/windowfn-rank",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/windowfn-rank.json",
+      "sha256": "5569dd92939e8ee3360fcfcf6ada343344c67cad39a7de3b2cb6fef0217a8314",
+      "digest": "sha256:5569dd92939e8ee3360fcfcf6ada343344c67cad39a7de3b2cb6fef0217a8314",
+      "case": "WindowFn.Rank",
+      "description": "The wire-surface harness's document for WindowFn.Rank: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/windowfn-rolling-mean",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/windowfn-rolling-mean.json",
+      "sha256": "21a073d00ebc2c0408c87dc610df9288402199733f53e3fd2f1e830a17250747",
+      "digest": "sha256:21a073d00ebc2c0408c87dc610df9288402199733f53e3fd2f1e830a17250747",
+      "case": "WindowFn.RollingMean",
+      "description": "The wire-surface harness's document for WindowFn.RollingMean: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/windowfn-rolling-sum",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/windowfn-rolling-sum.json",
+      "sha256": "9204c82c56f5d4569b8b2c5bff3950fd906abae198df3712baec5f4fe033476a",
+      "digest": "sha256:9204c82c56f5d4569b8b2c5bff3950fd906abae198df3712baec5f4fe033476a",
+      "case": "WindowFn.RollingSum",
+      "description": "The wire-surface harness's document for WindowFn.RollingSum: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "token/windowfn-row-number",
+      "family": "token",
+      "kind": "hash",
+      "file": "token/windowfn-row-number.json",
+      "sha256": "9c797ca5218564ebedcb71032ecae025205204fb9ba8be22f6d9376004e60530",
+      "digest": "sha256:9c797ca5218564ebedcb71032ecae025205204fb9ba8be22f6d9376004e60530",
+      "case": "WindowFn.RowNumber",
+      "description": "The wire-surface harness's document for WindowFn.RowNumber: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "source/accept-ref-without-schema",
+      "family": "source",
+      "kind": "accept",
+      "file": "source/accept-ref-without-schema.json",
+      "sha256": "fbea0ebc7fa491c8c9919cc6800108c8401379e780f436938104be65f430ba70",
+      "canonical": "[{\"$type\":\"union\",\"source\":{\"ref\":\"archive\",\"schema\":[]}}]",
+      "digest": "sha256:d7f572934f3965cdbbf6cb80b923d220af791210d2c162c7075c8c6dfbb3e1ce",
+      "description": "A source by reference without the empty `schema` member the canonical form writes."
+    },
+    {
+      "id": "source/embedded",
+      "family": "source",
+      "kind": "hash",
+      "file": "source/embedded.json",
+      "sha256": "3e0f57f3668b421bc2482114b82f4833df56254522aa4aa5bc4ba5124f0ee0c3",
+      "digest": "sha256:3e0f57f3668b421bc2482114b82f4833df56254522aa4aa5bc4ba5124f0ee0c3",
+      "case": "DataSource.Embedded",
+      "description": "The wire-surface harness's document for DataSource.Embedded: the shortest pipeline reaching that case, every optional member present."
+    },
+    {
+      "id": "source/ref",
+      "family": "source",
+      "kind": "hash",
+      "file": "source/ref.json",
+      "sha256": "8c99abf6d83f0b7d7da2cddf587bb54351b059406c7687950d77fc74c31321a4",
+      "digest": "sha256:8c99abf6d83f0b7d7da2cddf587bb54351b059406c7687950d77fc74c31321a4",
+      "case": "DataSource.Ref",
+      "description": "The wire-surface harness's document for DataSource.Ref: the shortest pipeline reaching that case, every optional member present."
+    }
+  ]
+}

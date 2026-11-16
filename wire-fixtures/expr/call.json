@@ -1,0 +1,1 @@
+[{"$type":"filter","pred":{"$type":"invoke","args":[{"$type":"col","name":"s"}],"name":"s"}}]

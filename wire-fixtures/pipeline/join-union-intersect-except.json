@@ -1,0 +1,1 @@
+[{"$type":"join","how":"left","on":[{"a":"region","b":"code"}],"source":{"ref":"regions","schema":[]}},{"$type":"union","source":{"ref":"archive","schema":[]}},{"$type":"intersect","source":{"ref":"active","schema":[]}},{"$type":"except","source":{"ref":"excluded","schema":[]}}]

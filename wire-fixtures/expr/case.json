@@ -1,0 +1,1 @@
+[{"$type":"filter","pred":{"$type":"case","cases":[{"then":{"$type":"col","name":"s"},"when":{"$type":"col","name":"s"}}],"else":{"$type":"col","name":"s"}}}]

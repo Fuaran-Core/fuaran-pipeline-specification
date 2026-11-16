@@ -1,0 +1,1 @@
+[{"$type":"filter","pred":{"$type":"not","expr":{"$type":"col","name":"s"}}}]

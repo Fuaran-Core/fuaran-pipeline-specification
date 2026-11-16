@@ -1,0 +1,1 @@
+[{"$type":"project","columns":[{"a":"region","b":"region"},{"a":"amount","b":"value"}]},{"$type":"distinct"},{"$type":"limit","n":{"$param":"pageSize"},"offset":0}]

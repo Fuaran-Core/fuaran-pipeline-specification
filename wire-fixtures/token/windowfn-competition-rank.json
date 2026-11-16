@@ -1,0 +1,1 @@
+[{"$type":"window","as":"s","fn":"competitionRank","of":"s","orderBy":[{"column":"s","dir":"asc"}],"partitionBy":["s"]}]

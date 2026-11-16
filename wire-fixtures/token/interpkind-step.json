@@ -1,0 +1,1 @@
+[{"$type":"filter","pred":{"$type":"interpolate","expr":{"$type":"col","name":"s"},"kind":"step","knots":[[1.5,1.5]],"outside":"clamp"}}]

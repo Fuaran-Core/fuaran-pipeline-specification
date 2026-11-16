@@ -1,0 +1,5 @@
+[
+  { "$type": "filter",
+    "pred": { "$type": "col", "name": "active" } },
+  { "$type": "distinct" }
+]

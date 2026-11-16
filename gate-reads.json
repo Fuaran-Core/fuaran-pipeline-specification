@@ -1,0 +1,8 @@
+{
+  "kind": "gateReads",
+  "_": "What this repository's gate (run.ps1) reads. It runs the two corpus scripts over the corpus and the schema, and its publication-boundary sweep reads every file the repository would publish, so `reads` claims every tracked file (`**`): nothing is gate-inert. The repository builds nothing.",
+  "reads": [
+    "**"
+  ],
+  "notRead": []
+}

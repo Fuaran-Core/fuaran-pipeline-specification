@@ -1,0 +1,1 @@
+[{"$type":"join","how":"sideways","on":[{"a":"k","b":"k"}],"source":{"ref":"lookup","schema":[]}}]

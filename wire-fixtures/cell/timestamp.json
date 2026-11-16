@@ -1,0 +1,1 @@
+[{"$type":"filter","pred":{"$type":"lit","cell":{"$type":"Timestamp","value":"2026-01-15T09:30:00Z"}}}]

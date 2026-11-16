@@ -1,0 +1,1 @@
+[{"$type":"window","as":"s","fn":"cumulMin","of":"s","orderBy":[{"column":"s","dir":"asc"}],"partitionBy":["s"]}]

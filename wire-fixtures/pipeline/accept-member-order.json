@@ -1,0 +1,1 @@
+[{"name":"net","expr":{"right":{"name":"discount","$type":"col"},"op":"sub","left":{"name":"amount","$type":"col"},"$type":"binary"},"$type":"derive"}]

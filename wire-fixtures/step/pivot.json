@@ -1,0 +1,1 @@
+[{"$type":"pivot","agg":"sum","index":["s"],"on":"s","values":"s"}]

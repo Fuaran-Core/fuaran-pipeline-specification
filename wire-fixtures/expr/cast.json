@@ -1,0 +1,1 @@
+[{"$type":"filter","pred":{"$type":"cast","expr":{"$type":"col","name":"s"},"type":"int"}}]

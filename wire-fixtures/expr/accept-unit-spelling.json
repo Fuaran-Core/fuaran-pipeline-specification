@@ -1,0 +1,1 @@
+[{"$type":"derive","expr":{"$type":"convert","expr":{"$type":"col","name":"force"},"unit":"m.kg/(s.s)"},"name":"newtons"}]

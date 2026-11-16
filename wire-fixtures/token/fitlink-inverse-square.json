@@ -1,0 +1,1 @@
+[{"$type":"fit","control":{"maxIter":1,"tol":1.5},"family":"inverseGaussian","groupBy":["s"],"intercept":true,"link":"inverseSquare","offset":{"$type":"col","name":"s"},"output":"coefficients","predictors":[{"expr":{"$type":"col","name":"s"},"name":"s"}],"response":"s","ridge":1.5,"weights":"s"}]

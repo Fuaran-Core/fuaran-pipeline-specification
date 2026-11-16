@@ -1,0 +1,1 @@
+[{"$type":"window","as":"quartile","fn":"ntile","n":4,"of":"amount","orderBy":[{"column":"month","dir":"asc"}],"partitionBy":["region"]},{"$type":"pivot","agg":"sum","index":["region"],"on":"month","values":"amount"},{"$type":"unpivot","idVars":["region"],"valueVars":["jan","feb"]}]

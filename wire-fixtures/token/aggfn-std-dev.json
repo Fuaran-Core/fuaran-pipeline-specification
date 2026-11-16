@@ -1,0 +1,1 @@
+[{"$type":"groupBy","aggs":[{"fn":"stddev","name":"s","of":"s"}],"keys":["s"]}]

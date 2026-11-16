@@ -1,0 +1,1 @@
+[{"$type":"fit","control":{"maxIter":1,"tol":1.5},"family":"tweedie","groupBy":["s"],"intercept":true,"link":"log","offset":{"$type":"col","name":"s"},"output":"coefficients","power":1.5,"predictors":[{"expr":{"$type":"col","name":"s"},"name":"s"}],"response":"s","ridge":1.5,"weights":"s"}]

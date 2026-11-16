@@ -1,0 +1,1 @@
+[{"$type":"filter","pred":{"$type":"quotient","dividend":{"$type":"col","name":"s"},"divisor":{"$type":"col","name":"s"},"rounding":{"mode":"ceiling","scale":1}}}]

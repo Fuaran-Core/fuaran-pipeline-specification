@@ -1,0 +1,1 @@
+[{"$type":"fit","control":{"maxIter":1,"tol":1.5},"family":"gaussian","groupBy":["s"],"intercept":true,"link":"identity","offset":{"$type":"col","name":"s"},"output":"residuals","predictors":[{"expr":{"$type":"col","name":"s"},"name":"s"}],"response":"s","ridge":1.5,"weights":"s"}]

@@ -1,0 +1,1599 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "The pipeline document of PIPELINE_WIRE.md section 5, format version 1. Structural, and subordinate to the text: where the two disagree the text is right and this file is a defect. It describes what a reader accepts, so it allows members it does not name (section 8).",
+  "title": "Compute pipeline, format version 1",
+  "type": "array",
+  "items": {
+    "$ref": "#/$defs/step"
+  },
+  "$defs": {
+    "param": {
+      "type": "object",
+      "required": [
+        "$param"
+      ],
+      "properties": {
+        "$param": {
+          "type": "string"
+        }
+      }
+    },
+    "int32": {
+      "type": "integer",
+      "minimum": -2147483648,
+      "maximum": 2147483647
+    },
+    "int32Slot": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/int32"
+        },
+        {
+          "$ref": "#/$defs/param"
+        }
+      ]
+    },
+    "floatSlot": {
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "$ref": "#/$defs/param"
+        }
+      ]
+    },
+    "stringSlot": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/$defs/param"
+        }
+      ]
+    },
+    "seed": {
+      "type": "string",
+      "pattern": "^(0|-?[1-9][0-9]{0,18})$"
+    },
+    "seedSlot": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/seed"
+        },
+        {
+          "$ref": "#/$defs/param"
+        }
+      ]
+    },
+    "cellSlot": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/cell"
+        },
+        {
+          "$ref": "#/$defs/param"
+        }
+      ]
+    },
+    "names": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "pair": {
+      "type": "object",
+      "required": [
+        "a",
+        "b"
+      ],
+      "properties": {
+        "a": {
+          "type": "string"
+        },
+        "b": {
+          "type": "string"
+        }
+      }
+    },
+    "unitText": {
+      "type": "string",
+      "minLength": 1
+    },
+    "columnType": {
+      "type": "string",
+      "enum": [
+        "int",
+        "float",
+        "bool",
+        "string",
+        "date",
+        "timestamp",
+        "decimal",
+        "timestamp_ms",
+        "timestamp_us",
+        "timestamp_ns"
+      ]
+    },
+    "cell": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "$type"
+          ],
+          "properties": {
+            "$type": {
+              "const": "Null"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "value"
+          ],
+          "properties": {
+            "$type": {
+              "const": "Int"
+            },
+            "value": {
+              "$ref": "#/$defs/int32"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "value"
+          ],
+          "properties": {
+            "$type": {
+              "const": "Float"
+            },
+            "value": {
+              "type": "number"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "value"
+          ],
+          "properties": {
+            "$type": {
+              "const": "Bool"
+            },
+            "value": {
+              "type": "boolean"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "value"
+          ],
+          "properties": {
+            "$type": {
+              "const": "Str"
+            },
+            "value": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "value"
+          ],
+          "properties": {
+            "$type": {
+              "const": "Date"
+            },
+            "value": {
+              "type": "string",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "value"
+          ],
+          "properties": {
+            "$type": {
+              "const": "Timestamp"
+            },
+            "value": {
+              "type": "string",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{0,8}[1-9])?Z$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "value"
+          ],
+          "properties": {
+            "$type": {
+              "const": "Decimal"
+            },
+            "value": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "pattern": "^-?[0-9]+(\\.[0-9]+)?$"
+                },
+                {
+                  "$ref": "#/$defs/int32"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "rounding": {
+      "type": "object",
+      "required": [
+        "mode",
+        "scale"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "half-even",
+            "half-up",
+            "half-down",
+            "up",
+            "down",
+            "ceiling",
+            "floor"
+          ]
+        },
+        "scale": {
+          "$ref": "#/$defs/int32Slot"
+        }
+      }
+    },
+    "expr": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "name"
+          ],
+          "properties": {
+            "$type": {
+              "const": "col"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "cell"
+          ],
+          "properties": {
+            "$type": {
+              "const": "lit"
+            },
+            "cell": {
+              "$ref": "#/$defs/cell"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "name"
+          ],
+          "properties": {
+            "$type": {
+              "const": "param"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "op",
+            "left",
+            "right"
+          ],
+          "properties": {
+            "$type": {
+              "const": "binary"
+            },
+            "op": {
+              "type": "string",
+              "enum": [
+                "add",
+                "sub",
+                "mul",
+                "div",
+                "mod",
+                "eq",
+                "ne",
+                "lt",
+                "le",
+                "gt",
+                "ge",
+                "and",
+                "or",
+                "contains",
+                "startsWith",
+                "endsWith"
+              ]
+            },
+            "left": {
+              "$ref": "#/$defs/expr"
+            },
+            "right": {
+              "$ref": "#/$defs/expr"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "expr"
+          ],
+          "properties": {
+            "$type": {
+              "const": "not"
+            },
+            "expr": {
+              "$ref": "#/$defs/expr"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "exprs"
+          ],
+          "properties": {
+            "$type": {
+              "const": "coalesce"
+            },
+            "exprs": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/expr"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "cases",
+            "else"
+          ],
+          "properties": {
+            "$type": {
+              "const": "case"
+            },
+            "cases": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "when",
+                  "then"
+                ],
+                "properties": {
+                  "when": {
+                    "$ref": "#/$defs/expr"
+                  },
+                  "then": {
+                    "$ref": "#/$defs/expr"
+                  }
+                }
+              }
+            },
+            "else": {
+              "$ref": "#/$defs/expr"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "type",
+            "expr"
+          ],
+          "properties": {
+            "$type": {
+              "const": "cast"
+            },
+            "type": {
+              "$ref": "#/$defs/columnType"
+            },
+            "expr": {
+              "$ref": "#/$defs/expr"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "fn",
+            "args"
+          ],
+          "properties": {
+            "$type": {
+              "const": "apply"
+            },
+            "fn": {
+              "type": "string",
+              "enum": [
+                "abs",
+                "round",
+                "floor",
+                "ceil",
+                "length",
+                "lower",
+                "upper",
+                "substr",
+                "datePart",
+                "concat",
+                "trim",
+                "replace",
+                "dateDiffDays",
+                "sqrt",
+                "least",
+                "greatest",
+                "indexOf",
+                "pow",
+                "exp",
+                "ln",
+                "log10"
+              ]
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/expr"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "expr",
+            "items"
+          ],
+          "properties": {
+            "$type": {
+              "const": "in"
+            },
+            "expr": {
+              "$ref": "#/$defs/expr"
+            },
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/expr"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "expr",
+            "param"
+          ],
+          "properties": {
+            "$type": {
+              "const": "in"
+            },
+            "expr": {
+              "$ref": "#/$defs/expr"
+            },
+            "param": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "expr"
+          ],
+          "properties": {
+            "$type": {
+              "const": "isNull"
+            },
+            "expr": {
+              "$ref": "#/$defs/expr"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "grain"
+          ],
+          "properties": {
+            "$type": {
+              "const": "now"
+            },
+            "grain": {
+              "type": "string",
+              "enum": [
+                "date",
+                "timestamp"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "dividend",
+            "divisor",
+            "rounding"
+          ],
+          "properties": {
+            "$type": {
+              "const": "quotient"
+            },
+            "dividend": {
+              "$ref": "#/$defs/expr"
+            },
+            "divisor": {
+              "$ref": "#/$defs/expr"
+            },
+            "rounding": {
+              "$ref": "#/$defs/rounding"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "expr",
+            "rounding"
+          ],
+          "properties": {
+            "$type": {
+              "const": "rounded"
+            },
+            "expr": {
+              "$ref": "#/$defs/expr"
+            },
+            "rounding": {
+              "$ref": "#/$defs/rounding"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "expr",
+            "unit"
+          ],
+          "properties": {
+            "$type": {
+              "const": "convert"
+            },
+            "expr": {
+              "$ref": "#/$defs/expr"
+            },
+            "unit": {
+              "$ref": "#/$defs/unitText"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "name"
+          ],
+          "properties": {
+            "$type": {
+              "const": "arg"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "name",
+            "args"
+          ],
+          "properties": {
+            "$type": {
+              "const": "invoke"
+            },
+            "name": {
+              "type": "string"
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/expr"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "expr",
+            "knots",
+            "kind",
+            "outside"
+          ],
+          "properties": {
+            "$type": {
+              "const": "interpolate"
+            },
+            "expr": {
+              "$ref": "#/$defs/expr"
+            },
+            "knots": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "linear",
+                "step",
+                "monotoneCubic"
+              ]
+            },
+            "outside": {
+              "type": "string",
+              "enum": [
+                "clamp",
+                "null"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "source": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "ref"
+          ],
+          "properties": {
+            "ref": {
+              "type": "string"
+            },
+            "schema": {
+              "type": "array"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "schema",
+            "columns"
+          ],
+          "properties": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "type"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "$ref": "#/$defs/columnType"
+                  },
+                  "unit": {
+                    "$ref": "#/$defs/unitText"
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "ext": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "columns": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "required": [
+                  "values",
+                  "validity"
+                ],
+                "properties": {
+                  "values": {
+                    "type": "array"
+                  },
+                  "validity": {
+                    "type": "array",
+                    "items": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "agg": {
+      "type": "object",
+      "required": [
+        "name",
+        "fn",
+        "of"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "fn": {
+          "type": "string",
+          "enum": [
+            "sum",
+            "mean",
+            "min",
+            "max",
+            "count",
+            "median",
+            "stddev",
+            "first",
+            "last",
+            "countDistinct"
+          ]
+        },
+        "of": {
+          "type": "string"
+        }
+      }
+    },
+    "namedExpr": {
+      "type": "object",
+      "required": [
+        "name",
+        "expr"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "expr": {
+          "$ref": "#/$defs/expr"
+        }
+      }
+    },
+    "fitSpec": {
+      "type": "object",
+      "required": [
+        "response",
+        "predictors",
+        "intercept",
+        "groupBy",
+        "family",
+        "link",
+        "control",
+        "output"
+      ],
+      "properties": {
+        "response": {
+          "type": "string"
+        },
+        "predictors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/namedExpr"
+          }
+        },
+        "intercept": {
+          "type": "boolean"
+        },
+        "groupBy": {
+          "$ref": "#/$defs/names"
+        },
+        "family": {
+          "type": "string",
+          "enum": [
+            "gaussian",
+            "poisson",
+            "gamma",
+            "tweedie",
+            "quasiPoisson",
+            "binomial",
+            "quasiBinomial",
+            "inverseGaussian",
+            "negativeBinomial"
+          ]
+        },
+        "link": {
+          "type": "string",
+          "enum": [
+            "identity",
+            "log",
+            "logit",
+            "probit",
+            "cloglog",
+            "inverse",
+            "inverseSquare",
+            "sqrt"
+          ]
+        },
+        "control": {
+          "type": "object",
+          "required": [
+            "maxIter",
+            "tol"
+          ],
+          "properties": {
+            "maxIter": {
+              "$ref": "#/$defs/int32Slot"
+            },
+            "tol": {
+              "$ref": "#/$defs/floatSlot"
+            }
+          }
+        },
+        "output": {
+          "type": "string",
+          "enum": [
+            "coefficients",
+            "summary",
+            "fitted",
+            "residuals"
+          ]
+        },
+        "power": {
+          "type": "number"
+        },
+        "theta": {
+          "type": "number"
+        },
+        "weights": {
+          "type": "string"
+        },
+        "offset": {
+          "$ref": "#/$defs/expr"
+        },
+        "ridge": {
+          "$ref": "#/$defs/floatSlot"
+        },
+        "stdErrors": {
+          "type": "string",
+          "enum": [
+            "classical",
+            "hc0",
+            "hc1",
+            "hc2",
+            "hc3"
+          ]
+        }
+      }
+    },
+    "step": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "pred"
+          ],
+          "properties": {
+            "$type": {
+              "const": "filter"
+            },
+            "pred": {
+              "$ref": "#/$defs/expr"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "columns"
+          ],
+          "properties": {
+            "$type": {
+              "const": "project"
+            },
+            "columns": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/pair"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "name",
+            "expr"
+          ],
+          "properties": {
+            "$type": {
+              "const": "derive"
+            },
+            "name": {
+              "type": "string"
+            },
+            "expr": {
+              "$ref": "#/$defs/expr"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "keys",
+            "aggs"
+          ],
+          "properties": {
+            "$type": {
+              "const": "groupBy"
+            },
+            "keys": {
+              "$ref": "#/$defs/names"
+            },
+            "aggs": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/agg"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "source",
+            "on",
+            "how"
+          ],
+          "properties": {
+            "$type": {
+              "const": "join"
+            },
+            "source": {
+              "$ref": "#/$defs/source"
+            },
+            "on": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/pair"
+              }
+            },
+            "how": {
+              "type": "string",
+              "enum": [
+                "inner",
+                "left",
+                "right",
+                "outer",
+                "semi",
+                "anti"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "partitionBy",
+            "orderBy",
+            "fn",
+            "of",
+            "as"
+          ],
+          "properties": {
+            "$type": {
+              "const": "window"
+            },
+            "partitionBy": {
+              "$ref": "#/$defs/names"
+            },
+            "orderBy": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "column",
+                  "dir"
+                ],
+                "properties": {
+                  "column": {
+                    "type": "string"
+                  },
+                  "dir": {
+                    "type": "string",
+                    "enum": [
+                      "asc",
+                      "desc"
+                    ]
+                  }
+                }
+              }
+            },
+            "fn": {
+              "type": "string",
+              "enum": [
+                "rowNumber",
+                "rank",
+                "lag",
+                "lead",
+                "cumulSum",
+                "rollingMean",
+                "denseRank",
+                "competitionRank",
+                "ntile",
+                "cumulMax",
+                "cumulMin",
+                "rollingSum"
+              ]
+            },
+            "of": {
+              "type": "string"
+            },
+            "as": {
+              "type": "string"
+            },
+            "n": {
+              "$ref": "#/$defs/int32"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "index",
+            "on",
+            "values",
+            "agg"
+          ],
+          "properties": {
+            "$type": {
+              "const": "pivot"
+            },
+            "index": {
+              "$ref": "#/$defs/names"
+            },
+            "on": {
+              "type": "string"
+            },
+            "values": {
+              "type": "string"
+            },
+            "agg": {
+              "type": "string",
+              "enum": [
+                "sum",
+                "mean",
+                "min",
+                "max",
+                "count",
+                "median",
+                "stddev",
+                "first",
+                "last",
+                "countDistinct"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "idVars",
+            "valueVars"
+          ],
+          "properties": {
+            "$type": {
+              "const": "unpivot"
+            },
+            "idVars": {
+              "$ref": "#/$defs/names"
+            },
+            "valueVars": {
+              "$ref": "#/$defs/names"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "by"
+          ],
+          "properties": {
+            "$type": {
+              "const": "sort"
+            },
+            "by": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "column",
+                  "dir"
+                ],
+                "properties": {
+                  "column": {
+                    "$ref": "#/$defs/stringSlot"
+                  },
+                  "dir": {
+                    "type": "string",
+                    "enum": [
+                      "asc",
+                      "desc"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type"
+          ],
+          "properties": {
+            "$type": {
+              "const": "distinct"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "n",
+            "offset"
+          ],
+          "properties": {
+            "$type": {
+              "const": "limit"
+            },
+            "n": {
+              "$ref": "#/$defs/int32Slot"
+            },
+            "offset": {
+              "$ref": "#/$defs/int32Slot"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "source"
+          ],
+          "properties": {
+            "$type": {
+              "const": "union"
+            },
+            "source": {
+              "$ref": "#/$defs/source"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "source"
+          ],
+          "properties": {
+            "$type": {
+              "const": "intersect"
+            },
+            "source": {
+              "$ref": "#/$defs/source"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "source"
+          ],
+          "properties": {
+            "$type": {
+              "const": "except"
+            },
+            "source": {
+              "$ref": "#/$defs/source"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "name",
+            "params",
+            "body"
+          ],
+          "properties": {
+            "$type": {
+              "const": "define"
+            },
+            "name": {
+              "type": "string"
+            },
+            "params": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "default": {
+                    "$ref": "#/$defs/cellSlot"
+                  }
+                }
+              }
+            },
+            "body": {
+              "$ref": "#/$defs/expr"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "response",
+            "predictors",
+            "intercept",
+            "groupBy",
+            "family",
+            "link",
+            "control",
+            "output"
+          ],
+          "properties": {
+            "$type": {
+              "const": "fit"
+            },
+            "response": {
+              "type": "string"
+            },
+            "predictors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/namedExpr"
+              }
+            },
+            "intercept": {
+              "type": "boolean"
+            },
+            "groupBy": {
+              "$ref": "#/$defs/names"
+            },
+            "family": {
+              "type": "string",
+              "enum": [
+                "gaussian",
+                "poisson",
+                "gamma",
+                "tweedie",
+                "quasiPoisson",
+                "binomial",
+                "quasiBinomial",
+                "inverseGaussian",
+                "negativeBinomial"
+              ]
+            },
+            "link": {
+              "type": "string",
+              "enum": [
+                "identity",
+                "log",
+                "logit",
+                "probit",
+                "cloglog",
+                "inverse",
+                "inverseSquare",
+                "sqrt"
+              ]
+            },
+            "control": {
+              "type": "object",
+              "required": [
+                "maxIter",
+                "tol"
+              ],
+              "properties": {
+                "maxIter": {
+                  "$ref": "#/$defs/int32Slot"
+                },
+                "tol": {
+                  "$ref": "#/$defs/floatSlot"
+                }
+              }
+            },
+            "output": {
+              "type": "string",
+              "enum": [
+                "coefficients",
+                "summary",
+                "fitted",
+                "residuals"
+              ]
+            },
+            "power": {
+              "type": "number"
+            },
+            "theta": {
+              "type": "number"
+            },
+            "weights": {
+              "type": "string"
+            },
+            "offset": {
+              "$ref": "#/$defs/expr"
+            },
+            "ridge": {
+              "$ref": "#/$defs/floatSlot"
+            },
+            "stdErrors": {
+              "type": "string",
+              "enum": [
+                "classical",
+                "hc0",
+                "hc1",
+                "hc2",
+                "hc3"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "fit",
+            "model",
+            "scale"
+          ],
+          "properties": {
+            "$type": {
+              "const": "predict"
+            },
+            "fit": {
+              "$ref": "#/$defs/fitSpec"
+            },
+            "model": {
+              "type": "object",
+              "required": [
+                "from",
+                "source"
+              ],
+              "properties": {
+                "from": {
+                  "type": "string",
+                  "enum": [
+                    "training",
+                    "coefficients"
+                  ]
+                },
+                "source": {
+                  "$ref": "#/$defs/source"
+                }
+              }
+            },
+            "scale": {
+              "type": "string",
+              "enum": [
+                "link",
+                "response"
+              ]
+            },
+            "interval": {
+              "type": "object",
+              "required": [
+                "kind",
+                "level"
+              ],
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "confidence",
+                    "prediction"
+                  ]
+                },
+                "level": {
+                  "$ref": "#/$defs/floatSlot"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "groupBy",
+            "features",
+            "standardise",
+            "k",
+            "restarts",
+            "maxIterations",
+            "seed",
+            "silhouette",
+            "output"
+          ],
+          "properties": {
+            "$type": {
+              "const": "kmeans"
+            },
+            "groupBy": {
+              "$ref": "#/$defs/names"
+            },
+            "features": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/namedExpr"
+              }
+            },
+            "standardise": {
+              "type": "boolean"
+            },
+            "k": {
+              "$ref": "#/$defs/int32Slot"
+            },
+            "restarts": {
+              "$ref": "#/$defs/int32"
+            },
+            "maxIterations": {
+              "$ref": "#/$defs/int32"
+            },
+            "seed": {
+              "$ref": "#/$defs/seedSlot"
+            },
+            "silhouette": {
+              "type": "boolean"
+            },
+            "output": {
+              "type": "string",
+              "enum": [
+                "assignments",
+                "centres",
+                "summary"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "$type",
+            "groupBy",
+            "replicates",
+            "seed",
+            "aggregates",
+            "output"
+          ],
+          "properties": {
+            "$type": {
+              "const": "bootstrap"
+            },
+            "groupBy": {
+              "$ref": "#/$defs/names"
+            },
+            "cluster": {
+              "type": "string"
+            },
+            "replicates": {
+              "$ref": "#/$defs/int32Slot"
+            },
+            "seed": {
+              "$ref": "#/$defs/seedSlot"
+            },
+            "aggregates": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/agg"
+              }
+            },
+            "level": {
+              "type": "number"
+            },
+            "output": {
+              "type": "string",
+              "enum": [
+                "replicates",
+                "summary"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

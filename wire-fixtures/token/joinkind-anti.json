@@ -1,0 +1,1 @@
+[{"$type":"join","how":"anti","on":[{"a":"s","b":"s"}],"source":{"columns":{"s":{"validity":[true],"values":[1]}},"schema":[{"description":"s","ext":{"s":"s"},"label":"s","name":"s","type":"int","unit":"m"}]}}]

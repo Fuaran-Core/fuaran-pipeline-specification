@@ -1,0 +1,1 @@
+[{"$type":"filter","pred":{"$type":"rounded","expr":{"$type":"col","name":"s"},"rounding":{"mode":"half-even","scale":1}}}]

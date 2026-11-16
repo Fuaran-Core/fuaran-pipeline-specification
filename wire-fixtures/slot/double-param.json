@@ -1,0 +1,1 @@
+[{"$type":"fit","control":{"maxIter":1,"tol":{"$param":"s"}},"family":"gaussian","groupBy":["s"],"intercept":true,"link":"identity","offset":{"$type":"col","name":"s"},"output":"coefficients","predictors":[{"expr":{"$type":"col","name":"s"},"name":"s"}],"response":"s","ridge":{"$param":"s"},"weights":"s"}]

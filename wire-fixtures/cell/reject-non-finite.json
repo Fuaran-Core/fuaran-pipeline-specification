@@ -1,0 +1,1 @@
+[{"$type":"filter","pred":{"$type":"lit","cell":{"$type":"Float","value":"NaN"}}}]
